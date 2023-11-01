@@ -6,7 +6,7 @@ CREATE TABLE player(
   player_id INT AUTO_INCREMENT,
   player_name VARCHAR(50) NOT NULL,
   email VARCHAR(255) NOT NULL,
-  `password` CHAR(64) NOT NULL,
+  player_password CHAR(64) NOT NULL,
   CONSTRAINT pk_player_player_id PRIMARY KEY(player_id)
 );
 
@@ -21,14 +21,14 @@ CREATE TABLE item(
 CREATE TABLE gear_weapon_customization(
   customized_id INT AUTO_INCREMENT,
   item_quality ENUM('high', 'normal') NOT NULL,
-  `condition` DECIMAL(10,2) NOT NULL,
+  customized_condition INT NOT NULL,
   dye_color VARCHAR(255),
   maker VARCHAR(255),
   CONSTRAINT pk_gear_weapon_customization_customized_id PRIMARY KEY(customized_id)
 );
 
 CREATE TABLE gear_slot(
-  gear_slot_id INT,
+  gear_slot_id INT AUTO_INCREMENT,
   gear_slot_name VARCHAR(255) NOT NULL,
   CONSTRAINT pk_gear_slot_gear_slot_id PRIMARY KEY(gear_slot_id)
 );
@@ -73,7 +73,7 @@ CREATE TABLE weapon(
 CREATE TABLE consumable_item(
   item_id INT,
   item_level INT NOT NULL,
-  `description` VARCHAR(255) NOT NULL,
+  item_description TEXT NOT NULL,
   CONSTRAINT pk_consumable_item_item_id PRIMARY KEY(item_id),
   CONSTRAINT fk_consumable_item_item_id FOREIGN KEY(item_id)
     REFERENCES item(item_id)
@@ -82,7 +82,7 @@ CREATE TABLE consumable_item(
 
 CREATE TABLE miscellaneous_item(
   item_id INT,
-  `description` VARCHAR(255) NOT NULL,
+  item_description TEXT NOT NULL,
   CONSTRAINT pk_miscellaneous_item_item_id PRIMARY KEY(item_id),
   CONSTRAINT fk_miscellaneous_item_item_id FOREIGN KEY(item_id)
     REFERENCES item(item_id)
@@ -90,20 +90,20 @@ CREATE TABLE miscellaneous_item(
 );
 
 
-CREATE TABLE `character`(
+CREATE TABLE avatar(
   character_id INT AUTO_INCREMENT,
   first_name VARCHAR(50) NOT NULL,
   last_name VARCHAR(50) NOT NULL,
   player_id INT  NOT NULL,
   weapon_id INT NOT NULL,
-  CONSTRAINT pk_character_character_id PRIMARY KEY(character_id),
-  CONSTRAINT fk_character_player_id FOREIGN KEY(player_id)
+  CONSTRAINT pk_avatar_character_id PRIMARY KEY(character_id),
+  CONSTRAINT fk_avatar_player_id FOREIGN KEY(player_id)
     REFERENCES player(player_id)
     ON UPDATE CASCADE ON DELETE CASCADE,
-  CONSTRAINT uq_character_first_name_last_name UNIQUE(first_name, last_name),
-  CONSTRAINT fk_character_weapon_id FOREIGN KEY(weapon_id)
+  CONSTRAINT uq_avatar_first_name_last_name UNIQUE(first_name, last_name),
+  CONSTRAINT fk_avatar_weapon_id FOREIGN KEY(weapon_id)
     REFERENCES weapon(item_id)
-    ON UPDATE CASCADE ON DELETE CASCADE
+    ON UPDATE CASCADE ON DELETE NO ACTION
 );
 
 CREATE TABLE currency(
@@ -122,7 +122,7 @@ CREATE TABLE character_currency(
   total_amount INT NOT NULL,
   CONSTRAINT pk_character_currency_character_id_currency_id PRIMARY KEY(character_id, currency_id),
   CONSTRAINT fk_character_currency_character_id FOREIGN KEY(character_id)
-    REFERENCES `character`(character_id)
+    REFERENCES avatar(character_id)
     ON UPDATE CASCADE ON DELETE CASCADE,
   CONSTRAINT fk_character_currency_currency_id FOREIGN KEY(currency_id)
     REFERENCES currency(currency_id)
@@ -144,7 +144,7 @@ CREATE TABLE character_job(
   is_current_job BOOL NOT NULL,
   CONSTRAINT pk_character_job_character_id_job_id PRIMARY KEY(character_id, job_id),
   CONSTRAINT fk_character_job_character_id FOREIGN KEY(character_id)
-    REFERENCES `character`(character_id)
+    REFERENCES avatar(character_id)
     ON UPDATE CASCADE ON DELETE CASCADE,
   CONSTRAINT fk_character_job_job_id FOREIGN KEY(job_id)
     REFERENCES job(job_id)
@@ -166,7 +166,7 @@ CREATE TABLE character_attribute(
     REFERENCES attribute(attribute_id)
     ON UPDATE CASCADE ON DELETE CASCADE,
   CONSTRAINT fk_character_attribute_character_id FOREIGN KEY(character_id)
-    REFERENCES `character`(character_id)
+    REFERENCES avatar(character_id)
     ON UPDATE CASCADE ON DELETE CASCADE
 );
 
@@ -176,7 +176,7 @@ CREATE TABLE character_equipped(
   item_id INT NOT NULL,
   CONSTRAINT pk_character_equipped_character_id_gear_slot_id PRIMARY KEY(character_id, gear_slot_id),
   CONSTRAINT fk_character_equipped_character_id FOREIGN KEY(character_id)
-    REFERENCES `character`(character_id)
+    REFERENCES avatar(character_id)
     ON UPDATE CASCADE ON DELETE CASCADE,
   CONSTRAINT fk_character_equipped_gear_slot_id FOREIGN KEY(gear_slot_id)
     REFERENCES gear_slot(gear_slot_id)
@@ -205,7 +205,7 @@ CREATE TABLE gear_weapon_bonus(
 CREATE TABLE consumable_item_effect(
   item_id INT,
   attribute_id INT,
-  effect_percentage DECIMAL(10,2) NOT NULL,
+  effect_percentage INT NOT NULL,
   max_effect_value INT NOT NULL,
   CONSTRAINT pk_consumable_item_effect_item_id_attribute_id PRIMARY KEY(item_id, attribute_id),
   CONSTRAINT fk_consumable_item_effect_item_id FOREIGN KEY(item_id)
@@ -217,13 +217,13 @@ CREATE TABLE consumable_item_effect(
 );
 
 CREATE TABLE inventory(
-  inventory_slot_id INT AUTO_INCREMENT,
+  inventory_slot_id INT,
   character_id INT,
   quantity INT NOT NULL,
   item_id INT NOT NULL,
   CONSTRAINT pk_inventory_inventory_slot_id_character_id PRIMARY KEY(inventory_slot_id, character_id),
   CONSTRAINT fk_inventory_inventory_character_id FOREIGN KEY(character_id)
-    REFERENCES `character`(character_id)
+    REFERENCES avatar(character_id)
     ON UPDATE CASCADE ON DELETE CASCADE,
   CONSTRAINT fk_inventory_inventory_item_id FOREIGN KEY(item_id)
     REFERENCES item(item_id)
