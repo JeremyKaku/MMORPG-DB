@@ -36,7 +36,6 @@ CREATE TABLE gear (
     required_level INT NOT NULL,
     defense_rating INT NOT NULL,
     magic_defense_rating INT NOT NULL,
-    customized_id INT,
     CONSTRAINT pk_gear_item_id PRIMARY KEY (item_id),
     CONSTRAINT fk_gear_item_id FOREIGN KEY (item_id)
         REFERENCES item (item_id)
@@ -53,7 +52,6 @@ CREATE TABLE weapon (
     damage_done INT NOT NULL,
     auto_attack DECIMAL(10 , 2 ) NOT NULL,
     attack_delay DECIMAL(10 , 2 ) NOT NULL,
-    customized_id INT,
     CONSTRAINT pk_weapon_item_id PRIMARY KEY (item_id),
     CONSTRAINT fk_weapon_item_id FOREIGN KEY (item_id)
         REFERENCES item (item_id)
