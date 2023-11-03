@@ -107,7 +107,6 @@ CREATE TABLE miscellaneous_item (
         ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-
 CREATE TABLE game_character (
     character_id INT AUTO_INCREMENT,
     first_name VARCHAR(50) NOT NULL,
@@ -339,7 +338,10 @@ INSERT INTO item VALUES
 (23,'Fire Shard',999,NULL),
 (24,'Cherry Bomb',1,60),
 (25,'Certificate of Collaboration',1,NULL),
-(26,'Lionsmane Belt',1,223);
+(26,'Lionsmane Belt',1,223),
+(27,'Tarnished Makai Bow',1,NULL),
+(28,'Tropaios Bow',1,NULL),
+(29,'Nue Greatbow',1,4);
 
 INSERT INTO miscellaneous_item VALUES
 (22,'This foul-smelling sap can be used to remove dyes quickly and easily. Remember to always use in a well-ventilated area.'),
@@ -353,7 +355,10 @@ INSERT INTO weapon VALUES
 (2,630,90,125,126.66,3.04),
 (3,1,90,9,9.36,3.12),
 (4,31,30,37,35.52,2.88),
-(5,510,80,103,107.12,3.12);
+(5,510,80,103,107.12,3.12),
+(27,1,1,9,9.12,3.04),
+(28,1,1,9,9.12,3.04),
+(29,1,1,9,9.12,3.04);
 
 INSERT INTO gear_slot VALUES
 (1,'Shield'),
@@ -386,7 +391,10 @@ INSERT INTO weapon_job VALUES
 (2,2),
 (3,3),
 (4,4),
-(5,5);
+(5,5),
+(27,2),
+(28,2),
+(29,2);
 
 INSERT INTO gear_job VALUES
 (6,6),
@@ -544,7 +552,10 @@ INSERT INTO customized_gear VALUES
 
 INSERT INTO customized_weapon VALUES
 (1,'high',69,'FF0000','Dark Matter'),
-(4,'normal',100,NULL,NULL);
+(4,'normal',100,NULL,NULL),
+(27,'normal',100,NULL,NULL),
+(28,'normal',100,NULL,NULL),
+(29,'normal',100,'0000FF','Satoru Gojo');
 
 INSERT INTO character_attribute VALUES
 (1,1,144),
