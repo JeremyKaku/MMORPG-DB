@@ -502,19 +502,19 @@ INSERT INTO game_character VALUES
 (5,	'Barret','Wallace',5,5);
 
 INSERT INTO character_job VALUES
-(1,1,90,10838000,True),
+(1,1,90,10838000,TRUE),
 (1,7,90,10838000,FALSE),
-(2,2,90,10838000,True),
-(3,3,90,10838000,True),
-(4,4,40,142000,True),
-(5,5,81,599200,True);
+(2,2,90,10838000,TRUE),
+(3,3,90,10838000,TRUE),
+(4,4,40,142000,TRUE),
+(5,5,81,599200,TRUE);
 
 INSERT INTO currency VALUES
-(1,'Gil',999999999,NULL,TRue),
-(2,'Company Seals',80000,NULL,TRue),
-(3,'Ventures',999999999,NULL,TRue),
-(4,'Wolf Marks',200000,NULL,TRue),
-(5,'Capped Tomestone',2000,900,TRue),
+(1,'Gil',999999999,NULL,TRUE),
+(2,'Company Seals',80000,NULL,TRUE),
+(3,'Ventures',999999999,NULL,TRUE),
+(4,'Wolf Marks',200000,NULL,TRUE),
+(5,'Capped Tomestone',2000,900,TRUE),
 (6,'Allagan Tomestone of Causality',2000,NULL,FALSE);
 
 INSERT INTO character_currency VALUES
