@@ -1,6 +1,6 @@
 package game.model;
 
-public class CustomizedGear implements java.io.Serializable {
+public class CustomizedGear extends Gear implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private int itemId;
