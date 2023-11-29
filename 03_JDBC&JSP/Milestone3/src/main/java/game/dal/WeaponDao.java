@@ -59,7 +59,7 @@ public class WeaponDao {
 
 		public Weapon getWeaponByID(int itemID) throws SQLException {
 			String selectWeapon =
-					"SELECT w.item_id,i.item_name as item_name,i.max_stack_size as max_stack_size,i.vendor_price as vendor_price,w.item_level as item_level,w.required_level as required_level,w.damage_done as damage_done,w.auto_attack as auto_attack,w.attack_delay as attack_delay " +
+					"SELECT w.item_id,i.item_name as item_name,i.max_stack_size as max_stack_size,i.vendor_price as vendor_price,w.item_level as item_level,w.required_level as required_level,w.damage_done as damage_done,w.auto_attack as auto_attack,w.attack_delay as attack_delay" +
 					"FROM Weapon w INNER JOIN Item i " +
 					"  ON w.item_id = i.item_id " +
 					"WHERE i.item_id=?;";
