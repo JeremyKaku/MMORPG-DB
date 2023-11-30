@@ -1,7 +1,7 @@
 package game.model;
 
 public class CustomizedGear extends Gear {
-	protected String itemQuality;
+    protected String itemQuality;
     protected int customizedCondition;
     protected String dyeColor;
     protected String maker;

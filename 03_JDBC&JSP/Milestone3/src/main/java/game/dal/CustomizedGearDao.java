@@ -73,7 +73,6 @@ public class CustomizedGearDao {
 				selectStmt = connection.prepareStatement(selectCustomItem);
 				selectStmt.setInt(1, itemID);
 				results = selectStmt.executeQuery();
-
 				if(results.next()) 
 				{
 					String resultItemName = results.getString("item_name");
@@ -90,7 +89,6 @@ public class CustomizedGearDao {
 					int resultItemCustomCond = results.getInt("customized_condition");
 					String resultDyeColor = results.getString("dye_color");
 					String resultItemMaker = results.getString("maker");
-					
 					CustomizedGear custGear = new CustomizedGear(itemID,resultItemName,resultMaxStackSize,resultVendorPrice,resultItemLevel,resultGearSlotID,resultReqLevel,resultDefenseRating,resultMagicRating,resultItemQuality,resultItemCustomCond,resultDyeColor,resultItemMaker);
 					return custGear;
 				}
