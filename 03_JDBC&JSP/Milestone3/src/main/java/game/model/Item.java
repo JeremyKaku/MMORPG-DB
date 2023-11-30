@@ -5,7 +5,7 @@ public class Item {
 	protected String itemName;
 	protected int maxStackSize;
 	protected double vendorPrice;
-	
+
 	public Item(int itemID, String itemName, int maxStackSize, double vendorPrice) {
 		this.itemID = itemID;
 		this.itemName = itemName;
@@ -18,7 +18,7 @@ public class Item {
 	}
 
 	/** Getters and setters. */
-	
+
 	public int getItemID() {
 		return itemID;
 	}

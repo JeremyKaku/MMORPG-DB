@@ -1,22 +1,22 @@
 package game.model;
 
 public class Player {
-    protected int playerID;
-    protected String playerName;
-    protected String email;
-    protected String playerPassword;
-	
-    public Player(int playerID, String playerName, String email, String playerPassword) {
+	protected int playerID;
+	protected String playerName;
+	protected String email;
+	protected String playerPassword;
+
+	public Player(int playerID, String playerName, String email, String playerPassword) {
 		this.playerID = playerID;
 		this.playerName = playerName;
 		this.email = email;
 		this.playerPassword = playerPassword;
 	}
-	
+
 	public Player(int playerID) {
 		this.playerID = playerID;
 	}
-	
+
 	/** Getters and setters. */
 
 	public int getPlayerID() {
@@ -50,5 +50,5 @@ public class Player {
 	public void setPlayerPassword(String playerPassword) {
 		this.playerPassword = playerPassword;
 	}
-	
+
 }

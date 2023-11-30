@@ -2,13 +2,13 @@ package game.model;
 
 public class Weapon extends Item {
 	protected int itemLevel;
-    protected int requiredLevel;
-    protected int damageDone;
+	protected int requiredLevel;
+	protected int damageDone;
 	protected float autoAttack;
 	protected float attackDelay;
 
-	public Weapon(int itemID, String itemName, int maxStackSize, double vendorPrice,int itemLevel,
-			int requiredLevel, int damageDone, float autoAttack, float attackDelay) {
+	public Weapon(int itemID, String itemName, int maxStackSize, double vendorPrice, int itemLevel, int requiredLevel,
+			int damageDone, float autoAttack, float attackDelay) {
 		super(itemID, itemName, maxStackSize, vendorPrice);
 		this.itemLevel = itemLevel;
 		this.requiredLevel = requiredLevel;
@@ -20,7 +20,7 @@ public class Weapon extends Item {
 	public Weapon(int itemID) {
 		super(itemID);
 	}
-	
+
 	/** Getters and setters. */
 
 	public int getItemLevel() {
@@ -61,5 +61,5 @@ public class Weapon extends Item {
 
 	public void setAttackDelay(float attackDelay) {
 		this.attackDelay = attackDelay;
-	}	 
+	}
 }

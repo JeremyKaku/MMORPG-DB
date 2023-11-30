@@ -1,9 +1,9 @@
 package game.model;
 
 public class WeaponBonus {
-    protected Weapon item;
-    protected Attribute attribute;
-    protected int bonusValue;
+	protected Weapon item;
+	protected Attribute attribute;
+	protected int bonusValue;
 
 	public WeaponBonus(Weapon item, Attribute attribute, int bonusValue) {
 		this.item = item;
@@ -15,8 +15,6 @@ public class WeaponBonus {
 		this.item = item;
 		this.attribute = attribute;
 	}
-	
-	/** Getters and setters. */
 
 	public Weapon getItem() {
 		return item;

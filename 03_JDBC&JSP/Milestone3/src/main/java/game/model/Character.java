@@ -1,12 +1,12 @@
 package game.model;
 
-public class Character{    
+public class Character {
 	protected int characterID;
 	protected String firstName;
-    protected String lastName;
-    protected Player player;
-    protected Weapon weapon;
-    
+	protected String lastName;
+	protected Player player;
+	protected Weapon weapon;
+
 	public Character(int characterID, String firstName, String lastName, Player player, Weapon weapon) {
 		this.characterID = characterID;
 		this.firstName = firstName;
@@ -14,11 +14,11 @@ public class Character{
 		this.player = player;
 		this.weapon = weapon;
 	}
-	
+
 	public Character(int characterID) {
 		this.characterID = characterID;
 	}
-	
+
 	public Character(Player player, Weapon weapon) {
 		this.player = player;
 		this.weapon = weapon;
@@ -65,5 +65,5 @@ public class Character{
 	public void setWeapon(Weapon weapon) {
 		this.weapon = weapon;
 	}
-      
+
 }

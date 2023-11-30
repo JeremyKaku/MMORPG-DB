@@ -6,9 +6,9 @@ public class Gear extends Item {
 	protected int requiredLevel;
 	protected int defenseRating;
 	protected int magicDefenseRating;
-	
-	public Gear(int itemID, String itemName, int maxStackSize, double vendorPrice, int itemLevel,
-			int gearSlotID, int requiredLevel, int defenseRating, int magicDefenseRating) {
+
+	public Gear(int itemID, String itemName, int maxStackSize, double vendorPrice, int itemLevel, int gearSlotID,
+			int requiredLevel, int defenseRating, int magicDefenseRating) {
 		super(itemID, itemName, maxStackSize, vendorPrice);
 		this.itemLevel = itemLevel;
 		this.gearSlotID = gearSlotID;
@@ -16,7 +16,7 @@ public class Gear extends Item {
 		this.defenseRating = defenseRating;
 		this.magicDefenseRating = magicDefenseRating;
 	}
-	
+
 	public Gear(int itemID) {
 		super(itemID);
 	}
