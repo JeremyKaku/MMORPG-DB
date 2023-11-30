@@ -125,4 +125,50 @@ public class CharacterAttributeDao {
 			}
 		}
 	}
+	
+	
+	public List<CharacterAttribute> getAllCharacterAttributes(int charID) throws SQLException {
+	    List<CharacterAttribute> characterAttributes = new ArrayList<>();
+	    String selectAllCharacterAttributes = "SELECT character_id, attribute_id, attribute_value FROM character_attribute where character_id=?;";
+	    Connection connection = null;
+	    PreparedStatement selectStmt = null;
+	    ResultSet results = null;
+
+	    try {
+	        connection = connectionManager.getConnection();
+	        selectStmt = connection.prepareStatement(selectAllCharacterAttributes);
+	        selectStmt.setInt(1, charID);
+	        results = selectStmt.executeQuery();
+	        CharacterDao charDao = CharacterDao.getInstance();
+	        AttributeDao attributeDao = AttributeDao.getInstance();
+
+	        while (results.next()) {
+	            int characterID = results.getInt("character_id");
+	            int attributeID = results.getInt("attribute_id");
+	            String attributeValue = results.getString("attribute_value");
+
+	            Character character = charDao.getCharacterByID(characterID);
+	            Attribute attribute = attributeDao.getAttributeByID(attributeID);
+
+	            CharacterAttribute characterAttribute = new CharacterAttribute(attribute, character, attributeValue);
+	            characterAttributes.add(characterAttribute);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        throw e;
+	    } finally {
+	        if (connection != null) {
+	            connection.close();
+	        }
+	        if (selectStmt != null) {
+	            selectStmt.close();
+	        }
+	        if (results != null) {
+	            results.close();
+	        }
+	    }
+
+	    return characterAttributes;
+	}
+
 }

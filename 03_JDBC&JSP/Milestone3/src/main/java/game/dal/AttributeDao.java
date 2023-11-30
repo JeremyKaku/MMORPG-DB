@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import game.model.Attribute;
 
@@ -95,4 +97,93 @@ public class AttributeDao {
 		}
 		return null;
 	}
+	
+	public Attribute updateAttributeName(Attribute attribute, String newName) throws SQLException {
+	    String updateAttributeName =
+	            "UPDATE Attribute SET attribute_name = ? WHERE attribute_id = ?;";
+	    Connection connection = null;
+	    PreparedStatement updateStmt = null;
+
+	    try {
+	        connection = connectionManager.getConnection();
+	        updateStmt = connection.prepareStatement(updateAttributeName);
+	        updateStmt.setString(1, newName);
+	        updateStmt.setInt(2, attribute.getAttributeID());
+	        updateStmt.executeUpdate();
+	        attribute.setAttributesName(newName);
+	        return attribute;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        throw e;
+	    } finally {
+	        if (connection != null) {
+	            connection.close();
+	        }
+	        if (updateStmt != null) {
+	            updateStmt.close();
+	        }
+	    }
+	}
+	
+	public Attribute deleteAttribute(Attribute attribute) throws SQLException {
+	    String deleteAttribute =
+	            "DELETE FROM Attribute WHERE attribute_id = ?;";
+	    Connection connection = null;
+	    PreparedStatement deleteStmt = null;
+
+	    try {
+	        connection = connectionManager.getConnection();
+	        deleteStmt = connection.prepareStatement(deleteAttribute);
+	        deleteStmt.setInt(1, attribute.getAttributeID());
+	        deleteStmt.executeUpdate();
+	        return null;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        throw e;
+	    } finally {
+	        if (connection != null) {
+	            connection.close();
+	        }
+	        if (deleteStmt != null) {
+	            deleteStmt.close();
+	        }
+	    }
+	}
+	
+	public List<Attribute> getAttributesByName(String attributeName) throws SQLException {
+	    List<Attribute> attributes = new ArrayList<>();
+	    String selectAttributesByName = "SELECT attribute_id, attribute_name FROM Attribute WHERE attribute_name LIKE ?;";
+	    Connection connection = null;
+	    PreparedStatement selectStmt = null;
+	    ResultSet results = null;
+	    try {
+	        connection = connectionManager.getConnection();
+	        selectStmt = connection.prepareStatement(selectAttributesByName);
+	        selectStmt.setString(1, "%" + attributeName + "%");
+	        results = selectStmt.executeQuery();
+
+	        while (results.next()) 
+	        {
+	            int attributeID = results.getInt("attribute_id");
+	            String name = results.getString("attribute_name");
+	            Attribute attribute = new Attribute(attributeID, name);
+	            attributes.add(attribute);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        throw e;
+	    } finally {
+	        if (connection != null) {
+	            connection.close();
+	        }
+	        if (selectStmt != null) {
+	            selectStmt.close();
+	        }
+	        if (results != null) {
+	            results.close();
+	        }
+	    }
+	    return attributes;
+	}
+
 }
