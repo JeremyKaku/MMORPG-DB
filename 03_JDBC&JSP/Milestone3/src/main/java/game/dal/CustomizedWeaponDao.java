@@ -33,7 +33,7 @@ public class CustomizedWeaponDao {
 	            connection = connectionManager.getConnection();
 	            insertStmt = connection.prepareStatement(insertCustomWeapon);
 	            insertStmt.setInt(1, customWeapon.getItemID());
-	            insertStmt.setString(2, customWeapon.getItemQuality().getItemQuality());
+	            insertStmt.setString(2, customWeapon.getItemQuality());
 	            insertStmt.setInt(3, customWeapon.getCustomizedCondition());
 	            insertStmt.setString(4, customWeapon.getDyeColor());
 	            insertStmt.setString(5, customWeapon.getMaker());

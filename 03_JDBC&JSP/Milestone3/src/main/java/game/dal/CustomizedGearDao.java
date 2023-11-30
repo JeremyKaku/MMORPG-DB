@@ -33,7 +33,7 @@ public class CustomizedGearDao {
 				connection = connectionManager.getConnection();
 				insertStmt = connection.prepareStatement(insertCustomGear);
 				insertStmt.setInt(1, customGear.getItemID());
-				insertStmt.setString(2, customGear.getItemQuality().getItemQuality());
+				insertStmt.setString(2, customGear.getItemQuality());
 				insertStmt.setInt(3, customGear.getCustomizedCondition());
 				insertStmt.setString(4, customGear.getDyeColor());
 				insertStmt.setString(5, customGear.getMaker());
@@ -74,7 +74,7 @@ public class CustomizedGearDao {
 				selectStmt = connection.prepareStatement(selectCustomItem);
 				selectStmt.setInt(1, itemID);
 				results = selectStmt.executeQuery();
-				QualityDao qualityDao = QualityDao.getInstance();
+
 				if(results.next()) 
 				{
 					String resultItemName = results.getString("item_name");
@@ -92,8 +92,7 @@ public class CustomizedGearDao {
 					String resultDyeColor = results.getString("dye_color");
 					String resultItemMaker = results.getString("maker");
 					
-					Quality quality = qualityDao.getQualityByName(resultItemQuality);
-					CustomizedGear custGear = new CustomizedGear(itemID,resultItemName,resultMaxStackSize,resultVendorPrice,resultItemLevel,resultGearSlotID,resultReqLevel,resultDefenseRating,resultMagicRating,quality,resultItemCustomCond,resultDyeColor,resultItemMaker);
+					CustomizedGear custGear = new CustomizedGear(itemID,resultItemName,resultMaxStackSize,resultVendorPrice,resultItemLevel,resultGearSlotID,resultReqLevel,resultDefenseRating,resultMagicRating,resultItemQuality,resultItemCustomCond,resultDyeColor,resultItemMaker);
 					return custGear;
 				}
 			} catch (SQLException e) {

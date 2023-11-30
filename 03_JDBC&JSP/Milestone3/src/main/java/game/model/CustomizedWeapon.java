@@ -1,13 +1,13 @@
 package game.model;
 
 public class CustomizedWeapon extends Weapon {
-    protected Quality itemQuality;
+    protected String itemQuality;
     protected int customizedCondition;
     protected String dyeColor;
     protected String maker;
 
 	public CustomizedWeapon(int itemID, String itemName, int maxStackSize, double vendorPrice, int itemLevel,
-			int requiredLevel, int damageDone, float autoAttack, float attackDelay, Quality itemQuality,
+			int requiredLevel, int damageDone, float autoAttack, float attackDelay, String itemQuality,
 			int customizedCondition, String dyeColor, String maker) {
 		super(itemID, itemName, maxStackSize, vendorPrice, itemLevel, requiredLevel, damageDone, autoAttack,
 				attackDelay);
@@ -23,11 +23,11 @@ public class CustomizedWeapon extends Weapon {
     
 	/** Getters and setters. */
 
-	public Quality getItemQuality() {
+	public String getItemQuality() {
 		return itemQuality;
 	}
 
-	public void setItemQuality(Quality itemQuality) {
+	public void setItemQuality(String itemQuality) {
 		this.itemQuality = itemQuality;
 	}
 
