@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import game.model.CustomizedGear;
-import game.model.Quality;
 
 public class CustomizedGearDao {
 	protected ConnectionManager connectionManager;
