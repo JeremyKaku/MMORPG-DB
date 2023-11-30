@@ -1,0 +1,19 @@
+package game.model;
+
+public class GearJob {
+   private Item item;
+    private Job job;
+	public Job getJob() {
+		return job;
+	}
+	public void setJob(Job job) {
+		this.job = job;
+	}
+	public Item getItem() {
+		return item;
+	}
+	public void setItem(Item item) {
+		this.item = item;
+	}
+	
+}
