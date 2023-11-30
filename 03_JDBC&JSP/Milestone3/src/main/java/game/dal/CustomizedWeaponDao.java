@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import game.model.CustomizedWeapon;
-import game.model.Quality;
 
 public class CustomizedWeaponDao {
 	protected ConnectionManager connectionManager;
@@ -33,7 +32,7 @@ public class CustomizedWeaponDao {
 	            connection = connectionManager.getConnection();
 	            insertStmt = connection.prepareStatement(insertCustomWeapon);
 	            insertStmt.setInt(1, customWeapon.getItemID());
-	            insertStmt.setString(2, customWeapon.getItemQuality().getItemQuality());
+	            insertStmt.setString(2, customWeapon.getItemQuality());
 	            insertStmt.setInt(3, customWeapon.getCustomizedCondition());
 	            insertStmt.setString(4, customWeapon.getDyeColor());
 	            insertStmt.setString(5, customWeapon.getMaker());
@@ -75,7 +74,6 @@ public class CustomizedWeaponDao {
 	            selectStmt = connection.prepareStatement(selectCustomWeapon);
 	            selectStmt.setInt(1, itemID);
 	            results = selectStmt.executeQuery();
-	            QualityDao qualityDao = QualityDao.getInstance();
 
 	            if (results.next()) {
 					String resultItemName = results.getString("item_name");
@@ -93,8 +91,7 @@ public class CustomizedWeaponDao {
 					String resultDyeColor = results.getString("dye_color");
 					String resultItemMaker = results.getString("maker");
 
-	                Quality quality = qualityDao.getQualityByName(resultItemQuality);
-	                CustomizedWeapon custWeapon = new CustomizedWeapon(itemID,resultItemName,resultMaxStackSize,resultVendorPrice,resultItemLevel,resultGearSlotID,resultReqLevel,resultDefenseRating,resultMagicRating,quality,resultItemCustomCond,resultDyeColor,resultItemMaker);
+	                CustomizedWeapon custWeapon = new CustomizedWeapon(itemID,resultItemName,resultMaxStackSize,resultVendorPrice,resultItemLevel,resultGearSlotID,resultReqLevel,resultDefenseRating,resultMagicRating,resultItemQuality,resultItemCustomCond,resultDyeColor,resultItemMaker);
 	                return custWeapon;
 	            }
 	        } catch (SQLException e) {

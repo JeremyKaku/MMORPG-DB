@@ -3,10 +3,10 @@ package game.model;
 public class ConsumableItemEffect {
     protected ConsumableItem item;
     protected Attribute attribute;
-    protected double effectPercentage;
+    protected int effectPercentage;
     protected int maxEffectValue;
 
-	public ConsumableItemEffect(ConsumableItem item, Attribute attribute, double effectPercentage, int maxEffectValue) {
+	public ConsumableItemEffect(ConsumableItem item, Attribute attribute, int effectPercentage, int maxEffectValue) {
 		this.item = item;
 		this.attribute = attribute;
 		this.effectPercentage = effectPercentage;
@@ -36,11 +36,11 @@ public class ConsumableItemEffect {
 		this.attribute = attribute;
 	}
 
-	public double getEffectPercentage() {
+	public int getEffectPercentage() {
 		return effectPercentage;
 	}
 
-	public void setEffectPercentage(double effectPercentage) {
+	public void setEffectPercentage(int effectPercentage) {
 		this.effectPercentage = effectPercentage;
 	}
 
