@@ -55,3 +55,12 @@
 03_JDBC&JSP/Milestone3/.metadata/.plugins/org.jboss.tools.usage/events/central-showOnStartup-N%2FA
 03_JDBC&JSP/Milestone3/.metadata/.plugins/org.jboss.tools.usage/events/jbt-installed-HIBERNATE
 03_JDBC&JSP/Milestone3/.metadata/version.ini
+03_JDBC&JSP/Servers/.project
+03_JDBC&JSP/Servers/.settings/org.eclipse.core.resources.prefs
+03_JDBC&JSP/Servers/.settings/org.eclipse.wst.server.core.prefs
+03_JDBC&JSP/Servers/Tomcat v9.0 Server at localhost-config/catalina.policy
+03_JDBC&JSP/Servers/Tomcat v9.0 Server at localhost-config/catalina.properties
+03_JDBC&JSP/Servers/Tomcat v9.0 Server at localhost-config/context.xml
+03_JDBC&JSP/Servers/Tomcat v9.0 Server at localhost-config/server.xml
+03_JDBC&JSP/Servers/Tomcat v9.0 Server at localhost-config/tomcat-users.xml
+03_JDBC&JSP/Servers/Tomcat v9.0 Server at localhost-config/web.xml
