@@ -7,7 +7,7 @@ public class Gear extends Item {
 	protected int defenseRating;
 	protected int magicDefenseRating;
 	
-	public Gear(int itemID, String itemName, int maxStackSize, double vendorPrice, int gear_id, int itemLevel,
+	public Gear(int itemID, String itemName, int maxStackSize, double vendorPrice, int itemLevel,
 			int gearSlotID, int requiredLevel, int defenseRating, int magicDefenseRating) {
 		super(itemID, itemName, maxStackSize, vendorPrice);
 		this.itemLevel = itemLevel;

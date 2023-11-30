@@ -1,18 +1,16 @@
 package game.model;
 
 public class CustomizedGear extends Gear {
-	protected Item item;
     protected Quality itemQuality;
     protected int customizedCondition;
     protected String dyeColor;
     protected String maker;
 	
-    public CustomizedGear(int itemID, String itemName, int maxStackSize, double vendorPrice, int gear_id, int itemLevel,
-			int gearSlotID, int requiredLevel, int defenseRating, int magicDefenseRating, Item item,
+    public CustomizedGear(int itemID, String itemName, int maxStackSize, double vendorPrice, int itemLevel,
+			int gearSlotID, int requiredLevel, int defenseRating, int magicDefenseRating,
 			Quality itemQuality, int customizedCondition, String dyeColor, String maker) {
-		super(itemID, itemName, maxStackSize, vendorPrice, gear_id, itemLevel, gearSlotID, requiredLevel, defenseRating,
+		super(itemID, itemName, maxStackSize, vendorPrice, itemLevel, gearSlotID, requiredLevel, defenseRating,
 				magicDefenseRating);
-		this.item = item;
 		this.itemQuality = itemQuality;
 		this.customizedCondition = customizedCondition;
 		this.dyeColor = dyeColor;
@@ -24,14 +22,6 @@ public class CustomizedGear extends Gear {
 	}
     
 	/** Getters and setters. */
-
-	public Item getItem() {
-		return item;
-	}
-
-	public void setItem(Item item) {
-		this.item = item;
-	}
 
 	public Quality getItemQuality() {
 		return itemQuality;
