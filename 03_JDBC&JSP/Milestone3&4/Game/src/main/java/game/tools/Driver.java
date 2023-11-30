@@ -8,8 +8,8 @@ import java.sql.SQLException;
 //import java.util.List;
 import java.time.LocalTime;
 import java.security.MessageDigest;
-import java.sql.DriverManager;
 import java.security.NoSuchAlgorithmException;
+import java.lang.reflect.Field;
 
 /**
  * main() runner, used for the app demo.
@@ -20,9 +20,8 @@ import java.security.NoSuchAlgorithmException;
  */
 public class Driver {
 
-	public static void main(String[] args) throws SQLException {
+	public static void main(String[] args) throws SQLException, IllegalAccessException {
 		// DAO instances.
-		PlayerDao playerDao = PlayerDao.getInstance();
 //		ApplicantDao applicantDao = ApplicantDao.getInstance();
 //		ReviewerDao reviewerDao = ReviewerDao.getInstance();
 //		LetterWriterDao letterWriterDao = LetterWriterDao.getInstance();
@@ -30,20 +29,19 @@ public class Driver {
 //		DegreeDao degreeDao = DegreeDao.getInstance();
 //		RecLetterDao recLetterDao = RecLetterDao.getInstance();
 //		Date date = new Date();
-
-		/****************************************
-		 * INSERT
-		 ****************************************/
+		insertData();
 		System.out.print("================INSERT   START================\n\n");
 		// User
-		System.out.format("*Inserting User: Start Time:%s \n", LocalTime.now());
-		Player player = new Player("Jing Guo", "guo.jing2@northeastern.edu", hashPasswordSHA2("password123"));
-		player = playerDao.create(player);
+//		System.out.format("*Inserting User: Start Time:%s \n", LocalTime.now());
+//		Player player = new Player("Jing Guo", "guo.jing2@northeastern.edu", hashPasswordSHA2("password123"));
+//		player = playerDao.create(player);
+//		System.out.format("User: PlayerName:%s FirstName:%s LastName:%s Email:%s \n", u1.getUserName(),
+//		u1.getFirstName(), u1.getLastName(), u1.getEmail());
 //		User user1 = new User("Xue Han", "xue", "han", "xuehan@gmail.com");
 //		user1 = userDao.create(user1);
 //		User user2 = new User("Richard Cobbe", "richard", "cobbe", "richardcobbe@gmail.com");
 //		user2 = userDao.create(user2);
-		System.out.format("*Inserting User: End Time:%s \n\n", LocalTime.now());
+//		System.out.format("*Inserting User: End Time:%s \n\n", LocalTime.now());
 //
 //		// Applicant
 //		System.out.format("*Inserting Applicant: Start Time:%s \n", LocalTime.now());
@@ -203,7 +201,34 @@ public class Driver {
 //		System.out.print("================UPDATE   END===================\n\n");
 
 	}
-	//SHA2 Hash
+
+	/**
+	 * This method insert data into each table.
+	 * 
+	 * @param Nothing
+	 * @return Nothing
+	 * @throws SQLException
+	 * @throws IllegalAccessException 
+	 */
+	private static void insertData() throws SQLException, IllegalAccessException {
+		PlayerDao playerDao = PlayerDao.getInstance();
+		System.out.print("================INSERT   START================\n\n");
+		// User
+		System.out.format("*Inserting User: Start Time:%s \n", LocalTime.now());
+		Player player = new Player("Jing Guo", "guo.jing2@northeastern.edu", hashPasswordSHA2("password123"));
+		player = playerDao.create(player);
+		System.out.format("*player inserted :%s \n\n", LocalTime.now());
+		
+//		System.out.format("User: PlayerName:%s FirstName:%s LastName:%s Email:%s \n", player.getUserName(),
+//				player.getFirstName(), player.getLastName(), player.getEmail());
+//		User user1 = new User("Xue Han", "xue", "han", "xuehan@gmail.com");
+//		user1 = userDao.create(user1);
+//		User user2 = new User("Richard Cobbe", "richard", "cobbe", "richardcobbe@gmail.com");
+//		user2 = userDao.create(user2);
+		System.out.format("*Inserting User: End Time:%s \n\n", LocalTime.now());
+	}
+
+	// SHA2 Hash
 	private static String hashPasswordSHA2(String password) {
 		try {
 			MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -222,6 +247,15 @@ public class Driver {
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+
+	public static void printObjectFields(Object obj) throws IllegalAccessException {
+		Class<?> clazz = obj.getClass();
+		Field[] fields = clazz.getDeclaredFields();
+		for (Field field : fields) {
+			field.setAccessible(true);
+			System.out.println(field.getName() + " = " + field.get(obj));
 		}
 	}
 }
