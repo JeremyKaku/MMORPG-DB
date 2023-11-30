@@ -63,7 +63,7 @@ public class CharacterAttributeDao {
 		List<CharacterAttribute> attributes = new ArrayList<CharacterAttribute>();
 		String selectAttributes = 
 				"SELECT character_id,attribute_id,attribute_value " + 
-				"FROM Attribute WHERE character_id=?;";
+				"FROM character_attribute WHERE character_id=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
 		ResultSet results = null;
