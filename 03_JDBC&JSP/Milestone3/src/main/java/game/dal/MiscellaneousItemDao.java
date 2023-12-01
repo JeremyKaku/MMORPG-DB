@@ -4,10 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import game.model.Item;
 import game.model.MiscellaneousItem;
 
-public class MiscellaneousItemDao {
+public class MiscellaneousItemDao extends ItemDao {
 	protected ConnectionManager connectionManager;
 	private static MiscellaneousItemDao instance = null;
 
@@ -23,10 +26,14 @@ public class MiscellaneousItemDao {
 	}
 
 	public MiscellaneousItem create(MiscellaneousItem misItem) throws SQLException {
+		Item newItem = create(new Item(misItem.getItemID(), misItem.getItemName(), misItem.getMaxStackSize(),
+				misItem.getVendorPrice()));
+
 		String insertMisItem = "INSERT INTO miscellaneous_item(item_id,item_description) " + "VALUES(?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
 		ResultSet resultKey = null;
+		misItem.setItemID(newItem.getItemID());
 		try {
 			connection = connectionManager.getConnection();
 			insertStmt = connection.prepareStatement(insertMisItem);
@@ -50,7 +57,7 @@ public class MiscellaneousItemDao {
 		}
 	}
 
-	public MiscellaneousItem getConsumableItemByID(int itemID) throws SQLException {
+	public MiscellaneousItem getMiscellaneousItemByID(int itemID) throws SQLException {
 		String selectMisItem = "SELECT m.item_id,i.item_name as item_name,i.max_stack_size as max_stack_size,i.vendor_price as vendor_price,m.item_description as item_description "
 				+ "FROM miscellaneous_item m INNER JOIN Item i " + "  ON m.item_id = i.item_id " + "WHERE i.item_id=?;";
 		Connection connection = null;
@@ -64,7 +71,7 @@ public class MiscellaneousItemDao {
 			if (results.next()) {
 				String resultItemName = results.getString("item_name");
 				int resultMaxStackSize = results.getInt("max_stack_size");
-				Double resultVendorPrize = results.getDouble("vendor_price");
+				int resultVendorPrize = results.getInt("vendor_price");
 				String resultItemDes = results.getString("item_description");
 				MiscellaneousItem misItem = new MiscellaneousItem(itemID, resultItemName, resultMaxStackSize,
 						resultVendorPrize, resultItemDes);
@@ -87,7 +94,7 @@ public class MiscellaneousItemDao {
 		return null;
 	}
 
-	public MiscellaneousItem updateItemDescription(MiscellaneousItem misItem, String newItemDescription)
+	public MiscellaneousItem updateMiscellaneousItemDescription(MiscellaneousItem misItem, String newItemDescription)
 			throws SQLException {
 		String updateItemDescription = "UPDATE miscellaneous_item SET item_description = ? WHERE item_id = ?;";
 		Connection connection = null;
@@ -115,4 +122,43 @@ public class MiscellaneousItemDao {
 		}
 	}
 
+	public List<MiscellaneousItem> getAllMiscellaneousItems() throws SQLException {
+		List<MiscellaneousItem> items = new ArrayList<>();
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		try {
+			connection = connectionManager.getConnection();
+			String query = "SELECT * FROM miscellaneous_item m JOIN Item i on i.item_id = m.item_id;";
+
+			statement = connection.prepareStatement(query);
+			resultSet = statement.executeQuery();
+
+			while (resultSet.next()) {
+				int itemId = resultSet.getInt("item_id");
+				String itemName = resultSet.getString("item_name");
+				int maxStackSize = resultSet.getInt("max_stack_size");
+				int vendorPrice = resultSet.getInt("vendor_price");
+				String description = resultSet.getString("item_description");
+
+				MiscellaneousItem miscellaneousItem = new MiscellaneousItem(itemId, itemName, maxStackSize, vendorPrice,
+						description);
+				items.add(miscellaneousItem);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if (connection != null) {
+				connection.close();
+			}
+			if (statement != null) {
+				statement.close();
+			}
+			if (resultSet != null) {
+				resultSet.close();
+			}
+		}
+		return items;
+	}
 }

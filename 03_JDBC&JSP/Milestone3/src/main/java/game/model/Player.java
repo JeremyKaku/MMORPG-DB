@@ -6,8 +6,17 @@ public class Player {
 	protected String email;
 	protected String playerPassword;
 
+	public Player() {
+	}
+
 	public Player(int playerID, String playerName, String email, String playerPassword) {
 		this.playerID = playerID;
+		this.playerName = playerName;
+		this.email = email;
+		this.playerPassword = playerPassword;
+	}
+	
+	public Player(String playerName, String email, String playerPassword) {
 		this.playerName = playerName;
 		this.email = email;
 		this.playerPassword = playerPassword;

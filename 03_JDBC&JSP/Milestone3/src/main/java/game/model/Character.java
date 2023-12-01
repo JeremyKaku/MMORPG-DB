@@ -7,6 +7,9 @@ public class Character {
 	protected Player player;
 	protected Weapon weapon;
 
+	public Character() {
+	}
+
 	public Character(int characterID, String firstName, String lastName, Player player, Weapon weapon) {
 		this.characterID = characterID;
 		this.firstName = firstName;
@@ -15,6 +18,13 @@ public class Character {
 		this.weapon = weapon;
 	}
 
+	public Character(String firstName, String lastName, Player player, Weapon weapon) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.player = player;
+		this.weapon = weapon;
+	}
+	
 	public Character(int characterID) {
 		this.characterID = characterID;
 	}

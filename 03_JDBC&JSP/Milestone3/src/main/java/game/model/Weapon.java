@@ -1,15 +1,30 @@
 package game.model;
 
+import java.math.BigDecimal;
+
 public class Weapon extends Item {
 	protected int itemLevel;
 	protected int requiredLevel;
 	protected int damageDone;
-	protected float autoAttack;
-	protected float attackDelay;
+	protected BigDecimal autoAttack;
+	protected BigDecimal attackDelay;
 
-	public Weapon(int itemID, String itemName, int maxStackSize, double vendorPrice, int itemLevel, int requiredLevel,
-			int damageDone, float autoAttack, float attackDelay) {
+	public Weapon() {
+	}
+
+	public Weapon(int itemID, String itemName, int maxStackSize, int vendorPrice, int itemLevel, int requiredLevel,
+			int damageDone, BigDecimal autoAttack, BigDecimal attackDelay) {
 		super(itemID, itemName, maxStackSize, vendorPrice);
+		this.itemLevel = itemLevel;
+		this.requiredLevel = requiredLevel;
+		this.damageDone = damageDone;
+		this.autoAttack = autoAttack;
+		this.attackDelay = attackDelay;
+	}
+	
+	public Weapon(String itemName, int maxStackSize, int vendorPrice, int itemLevel, int requiredLevel,
+			int damageDone, BigDecimal autoAttack, BigDecimal attackDelay) {
+		super(itemName, maxStackSize, vendorPrice);
 		this.itemLevel = itemLevel;
 		this.requiredLevel = requiredLevel;
 		this.damageDone = damageDone;
@@ -47,19 +62,19 @@ public class Weapon extends Item {
 		this.damageDone = damageDone;
 	}
 
-	public float getAutoAttack() {
+	public BigDecimal getAutoAttack() {
 		return autoAttack;
 	}
 
-	public void setAutoAttack(float autoAttack) {
+	public void setAutoAttack(BigDecimal autoAttack) {
 		this.autoAttack = autoAttack;
 	}
 
-	public float getAttackDelay() {
+	public BigDecimal getAttackDelay() {
 		return attackDelay;
 	}
 
-	public void setAttackDelay(float attackDelay) {
+	public void setAttackDelay(BigDecimal attackDelay) {
 		this.attackDelay = attackDelay;
 	}
 }

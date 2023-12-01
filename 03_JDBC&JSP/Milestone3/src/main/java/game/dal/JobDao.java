@@ -24,7 +24,7 @@ public class JobDao {
 	}
 
 	public Job create(Job job) throws SQLException {
-		String insertJob = "INSERT INTO job (job_name, availability) VALUES (?, ?)";
+		String insertJob = "INSERT INTO job (job_name, availiability) VALUES (?, ?)";
 
 		Connection connection = null;
 		PreparedStatement insertStmt = null;

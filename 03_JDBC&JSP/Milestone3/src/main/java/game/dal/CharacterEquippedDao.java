@@ -35,7 +35,7 @@ public class CharacterEquippedDao {
 			insertStmt = connection.prepareStatement(insertCharacterEquipped);
 			insertStmt.setInt(1, characterEquipped.getCharacter().getCharacterID());
 			insertStmt.setInt(2, characterEquipped.getGearSlot().getGearSlotId());
-			insertStmt.setInt(3, characterEquipped.getItem().getItemID());
+			insertStmt.setInt(3, characterEquipped.getGear().getItemID());
 			insertStmt.executeUpdate();
 
 			return characterEquipped;
@@ -62,7 +62,6 @@ public class CharacterEquippedDao {
 		ResultSet results = null;
 		CharacterDao characterDao = CharacterDao.getInstance();
 		GearSlotDao gearSlotDao = GearSlotDao.getInstance();
-		ItemDao itemDao = ItemDao.getInstance();
 
 		try {
 			connection = connectionManager.getConnection();
@@ -74,12 +73,12 @@ public class CharacterEquippedDao {
 			if (results.next()) {
 				int resultCharacterId = results.getInt("character_id");
 				int resultGearSlotId = results.getInt("gear_slot_id");
-				int itemId = results.getInt("item_id");
+				int gearID = results.getInt("item_id");
 
 				CharacterEquipped characterEquipped = new CharacterEquipped();
 				characterEquipped.setCharacter(characterDao.getCharacterByID(resultCharacterId));
 				characterEquipped.setGearSlot(gearSlotDao.getGearSlotById(resultGearSlotId));
-				characterEquipped.setItem(itemDao.getItemByID(itemId));
+				characterEquipped.setGear(GearDao.getInstance().getGearByID(gearID));
 
 				return characterEquipped;
 			}

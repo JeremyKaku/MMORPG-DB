@@ -28,19 +28,18 @@ public class CharacterDao {
 	}
 
 	public Character create(Character character) throws SQLException {
-		String insertCharacter = "INSERT INTO game_character(character_id,first_name,last_name,player_id,weapon_id) "
-				+ "VALUES(?,?,?,?,?);";
+		String insertCharacter = "INSERT INTO game_character(first_name,last_name,player_id,weapon_id) "
+				+ "VALUES(?,?,?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
 		ResultSet resultKey = null;
 		try {
 			connection = connectionManager.getConnection();
 			insertStmt = connection.prepareStatement(insertCharacter, Statement.RETURN_GENERATED_KEYS);
-			insertStmt.setInt(1, character.getCharacterID());
-			insertStmt.setString(2, character.getFirstName());
-			insertStmt.setString(3, character.getLastName());
-			insertStmt.setInt(4, character.getPlayer().getPlayerID());
-			insertStmt.setInt(5, character.getWeapon().getItemID());
+			insertStmt.setString(1, character.getFirstName());
+			insertStmt.setString(2, character.getLastName());
+			insertStmt.setInt(3, character.getPlayer().getPlayerID());
+			insertStmt.setInt(4, character.getWeapon().getItemID());
 			insertStmt.executeUpdate();
 
 			resultKey = insertStmt.getGeneratedKeys();
@@ -70,7 +69,7 @@ public class CharacterDao {
 	}
 
 	public Character getCharacterByID(int characterID) throws SQLException {
-		String selectPerson = "SELECT character_id,first_name,last_name,player_id,weapon_id FROM Character WHERE character_id=?;";
+		String selectPerson = "SELECT character_id,first_name,last_name,player_id,weapon_id FROM game_character WHERE character_id=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
 		ResultSet results = null;

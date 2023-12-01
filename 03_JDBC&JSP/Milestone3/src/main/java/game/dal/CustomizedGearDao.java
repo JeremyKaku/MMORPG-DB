@@ -5,9 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import game.model.CustomizedGear;
+import game.model.*;
 
-public class CustomizedGearDao {
+public class CustomizedGearDao extends GearDao {
 	protected ConnectionManager connectionManager;
 	private static CustomizedGearDao instance = null;
 
@@ -23,11 +23,16 @@ public class CustomizedGearDao {
 	}
 
 	public CustomizedGear create(CustomizedGear customGear) throws SQLException {
+		Gear newGear = create(new Gear(customGear.getItemID(), customGear.getItemName(), customGear.getMaxStackSize(),
+				customGear.getVendorPrice(), customGear.getItemLevel(), customGear.getGearSlot(),
+				customGear.getRequiredLevel(), customGear.getDefenseRating(), customGear.getMagicDefenseRating()));
+
 		String insertCustomGear = "INSERT INTO customized_gear(item_id,item_quality,customized_condition,dye_color,maker) "
 				+ "VALUES(?,?,?,?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
 		ResultSet resultKey = null;
+		customGear.setItemID(newGear.getItemID());
 		try {
 			connection = connectionManager.getConnection();
 			insertStmt = connection.prepareStatement(insertCustomGear);
@@ -54,7 +59,7 @@ public class CustomizedGearDao {
 		}
 	}
 
-	public CustomizedGear getConsumableItemByID(int itemID) throws SQLException {
+	public CustomizedGear getCustomizedGearByID(int itemID) throws SQLException {
 		String selectCustomItem = "SELECT i.item_id as item_id, i.item_name as item_name, i.max_stack_size as max_stack_size, i.vendor_price as vendor_price,"
 				+ " g.item_level as item_level,g.gear_slot_id as gear_slot_id, g.required_level as required_level,g.defense_rating as defense_rating,"
 				+ " g.magic_defense_rating as magic_defense_rating, cg.item_quality as item_quality, cg.customized_condition as customized_condition,"
@@ -70,6 +75,7 @@ public class CustomizedGearDao {
 			selectStmt = connection.prepareStatement(selectCustomItem);
 			selectStmt.setInt(1, itemID);
 			results = selectStmt.executeQuery();
+			GearSlotDao gearSlotDao = GearSlotDao.getInstance();
 			if (results.next()) {
 				String resultItemName = results.getString("item_name");
 				int resultMaxStackSize = results.getInt("max_stack_size");
@@ -85,8 +91,9 @@ public class CustomizedGearDao {
 				int resultItemCustomCond = results.getInt("customized_condition");
 				String resultDyeColor = results.getString("dye_color");
 				String resultItemMaker = results.getString("maker");
+				GearSlot gearSlot = gearSlotDao.getGearSlotById(resultGearSlotID);
 				CustomizedGear custGear = new CustomizedGear(itemID, resultItemName, resultMaxStackSize,
-						resultVendorPrice, resultItemLevel, resultGearSlotID, resultReqLevel, resultDefenseRating,
+						resultVendorPrice, resultItemLevel, gearSlot, resultReqLevel, resultDefenseRating,
 						resultMagicRating, resultItemQuality, resultItemCustomCond, resultDyeColor, resultItemMaker);
 				return custGear;
 			}

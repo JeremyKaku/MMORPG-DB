@@ -6,8 +6,11 @@ public class CustomizedGear extends Gear {
 	protected String dyeColor;
 	protected String maker;
 
-	public CustomizedGear(int itemID, String itemName, int maxStackSize, double vendorPrice, int itemLevel,
-			int gearSlotID, int requiredLevel, int defenseRating, int magicDefenseRating, String itemQuality,
+	public CustomizedGear() {
+	}
+
+	public CustomizedGear(int itemID, String itemName, int maxStackSize, int vendorPrice, int itemLevel,
+			GearSlot gearSlotID, int requiredLevel, int defenseRating, int magicDefenseRating, String itemQuality,
 			int customizedCondition, String dyeColor, String maker) {
 		super(itemID, itemName, maxStackSize, vendorPrice, itemLevel, gearSlotID, requiredLevel, defenseRating,
 				magicDefenseRating);

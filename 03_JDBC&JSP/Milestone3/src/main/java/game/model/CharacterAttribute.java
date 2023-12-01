@@ -5,6 +5,9 @@ public class CharacterAttribute {
 	protected Character character;
 	protected String atrributeValue;
 
+	public CharacterAttribute() {
+	}
+
 	public CharacterAttribute(Attribute attribute, Character character, String atrributeValue) {
 		this.attribute = attribute;
 		this.character = character;

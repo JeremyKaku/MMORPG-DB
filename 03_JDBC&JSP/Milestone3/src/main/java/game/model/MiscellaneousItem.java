@@ -3,8 +3,10 @@ package game.model;
 public class MiscellaneousItem extends Item {
 	protected String itemDescription;
 
-	public MiscellaneousItem(int itemID, String itemName, int maxStackSize, double vendorPrice,
-			String itemDescription) {
+	public MiscellaneousItem() {
+	}
+
+	public MiscellaneousItem(int itemID, String itemName, int maxStackSize, int vendorPrice, String itemDescription) {
 		super(itemID, itemName, maxStackSize, vendorPrice);
 		this.itemDescription = itemDescription;
 	}

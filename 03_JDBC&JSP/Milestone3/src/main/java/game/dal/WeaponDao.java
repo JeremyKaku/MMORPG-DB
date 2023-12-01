@@ -1,13 +1,15 @@
 package game.dal;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import game.model.Item;
 import game.model.Weapon;
 
-public class WeaponDao {
+public class WeaponDao extends ItemDao {
 	protected ConnectionManager connectionManager;
 	private static WeaponDao instance = null;
 
@@ -23,11 +25,14 @@ public class WeaponDao {
 	}
 
 	public Weapon create(Weapon weapon) throws SQLException {
+		Item newItem = create(new Item(weapon.getItemName(), weapon.getMaxStackSize(), weapon.getVendorPrice()));
+
 		String insertWeapon = "INSERT INTO weapon(item_id,item_level,required_level,damage_done,auto_attack,attack_delay) "
 				+ "VALUES(?,?,?,?,?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
 		ResultSet resultKey = null;
+		weapon.setItemID(newItem.getItemID());
 		try {
 			connection = connectionManager.getConnection();
 			insertStmt = connection.prepareStatement(insertWeapon);
@@ -35,8 +40,8 @@ public class WeaponDao {
 			insertStmt.setInt(2, weapon.getItemLevel());
 			insertStmt.setInt(3, weapon.getRequiredLevel());
 			insertStmt.setInt(4, weapon.getDamageDone());
-			insertStmt.setFloat(5, weapon.getAutoAttack());
-			insertStmt.setFloat(6, weapon.getAttackDelay());
+			insertStmt.setBigDecimal(5, weapon.getAutoAttack());
+			insertStmt.setBigDecimal(6, weapon.getAttackDelay());
 			insertStmt.executeUpdate();
 			return weapon;
 		} catch (SQLException e) {
@@ -69,12 +74,12 @@ public class WeaponDao {
 			if (results.next()) {
 				String resultItemName = results.getString("item_name");
 				int resultMaxStackSize = results.getInt("max_stack_size");
-				Double resultVendorPrize = results.getDouble("vendor_price");
+				int resultVendorPrize = results.getInt("vendor_price");
 				int resultItemLevel = results.getInt("item_level");
 				int resultReqLevel = results.getInt("required_level");
-				int resultDamageDone = results.getInt("vendor_price");
-				float resultAutoAttack = results.getFloat("email");
-				float resultAutoDelay = results.getFloat("email");
+				int resultDamageDone = results.getInt("damage_done");
+				BigDecimal resultAutoAttack = results.getBigDecimal("auto_attack");
+				BigDecimal resultAutoDelay = results.getBigDecimal("attack_delay");
 				Weapon reviewer = new Weapon(itemID, resultItemName, resultMaxStackSize, resultVendorPrize,
 						resultItemLevel, resultReqLevel, resultDamageDone, resultAutoAttack, resultAutoDelay);
 				return reviewer;
@@ -95,4 +100,5 @@ public class WeaponDao {
 		}
 		return null;
 	}
+
 }

@@ -6,6 +6,9 @@ public class ConsumableItemEffect {
 	protected int effectPercentage;
 	protected int maxEffectValue;
 
+	public ConsumableItemEffect() {
+	}
+
 	public ConsumableItemEffect(ConsumableItem item, Attribute attribute, int effectPercentage, int maxEffectValue) {
 		this.item = item;
 		this.attribute = attribute;

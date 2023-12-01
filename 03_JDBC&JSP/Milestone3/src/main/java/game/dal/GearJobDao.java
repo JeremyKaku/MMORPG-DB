@@ -23,7 +23,7 @@ public class GearJobDao {
 		connectionManager = new ConnectionManager();
 	}
 
-	public GearJob insertGearJob(GearJob gearJob) throws SQLException {
+	public GearJob create(GearJob gearJob) throws SQLException {
 		String insertGearJob = "INSERT INTO gear_job (item_id, job_id) VALUES (?, ?)";
 
 		Connection connection = null;
@@ -33,7 +33,7 @@ public class GearJobDao {
 		try {
 			connection = connectionManager.getConnection();
 			insertStmt = connection.prepareStatement(insertGearJob);
-			insertStmt.setInt(1, gearJob.getItem().getItemID());
+			insertStmt.setInt(1, gearJob.getGear().getItemID());
 			insertStmt.setInt(2, gearJob.getJob().getJobId());
 			insertStmt.executeUpdate();
 
@@ -60,7 +60,7 @@ public class GearJobDao {
 		PreparedStatement selectStmt = null;
 		ResultSet results = null;
 		JobDao jobDao = JobDao.getInstance();
-		ItemDao itemDao = ItemDao.getInstance();
+		GearDao gearDao = GearDao.getInstance();
 
 		try {
 			connection = connectionManager.getConnection();
@@ -74,7 +74,7 @@ public class GearJobDao {
 				int resultJobID = results.getInt("job_id");
 
 				GearJob gearJob = new GearJob();
-				gearJob.setItem(itemDao.getItemByID(resultItemID));
+				gearJob.setGear(gearDao.getGearByID(resultItemID));
 				gearJob.setJob(jobDao.getJobById(resultJobID));
 
 				return gearJob;

@@ -5,6 +5,9 @@ public class WeaponBonus {
 	protected Attribute attribute;
 	protected int bonusValue;
 
+	public WeaponBonus() {
+	}
+
 	public WeaponBonus(Weapon item, Attribute attribute, int bonusValue) {
 		this.item = item;
 		this.attribute = attribute;
@@ -15,6 +18,8 @@ public class WeaponBonus {
 		this.item = item;
 		this.attribute = attribute;
 	}
+
+	/** Getters and setters. */
 
 	public Weapon getItem() {
 		return item;

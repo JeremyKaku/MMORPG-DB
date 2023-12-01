@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import game.model.Player;
 
@@ -24,17 +26,16 @@ public class PlayerDao {
 	}
 
 	public Player create(Player player) throws SQLException {
-		String insertPlayer = "INSERT INTO Player(player_id,player_name,email,player_password) " + "VALUES(?,?,?,?);";
+		String insertPlayer = "INSERT INTO Player(player_name,email,player_password) " + "VALUES(?,?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
 		ResultSet resultKey = null;
 		try {
 			connection = connectionManager.getConnection();
 			insertStmt = connection.prepareStatement(insertPlayer, Statement.RETURN_GENERATED_KEYS);
-			insertStmt.setInt(1, player.getPlayerID());
-			insertStmt.setString(2, player.getPlayerName());
-			insertStmt.setString(3, player.getEmail());
-			insertStmt.setString(4, player.getPlayerPassword());
+			insertStmt.setString(1, player.getPlayerName());
+			insertStmt.setString(2, player.getEmail());
+			insertStmt.setString(3, player.getPlayerPassword());
 			insertStmt.executeUpdate();
 
 			resultKey = insertStmt.getGeneratedKeys();
@@ -118,5 +119,26 @@ public class PlayerDao {
 				deleteStmt.close();
 			}
 		}
+	}
+
+	public List<Player> getAllPlayers() throws SQLException {
+		String selectPlayers = "SELECT * FROM player;";
+		List<Player> players = new ArrayList<>();
+
+		try (Connection connection = connectionManager.getConnection();
+				PreparedStatement selectStmt = connection.prepareStatement(selectPlayers);
+				ResultSet results = selectStmt.executeQuery()) {
+
+			while (results.next()) {
+				int playerId = results.getInt("player_id");
+				String playerName = results.getString("player_name");
+				Player player = new Player();
+				player.setPlayerID(playerId);
+				player.setPlayerName(playerName);
+				players.add(player);
+			}
+		}
+
+		return players;
 	}
 }

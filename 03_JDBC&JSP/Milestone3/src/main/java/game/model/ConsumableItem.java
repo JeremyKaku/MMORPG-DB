@@ -4,7 +4,10 @@ public class ConsumableItem extends Item {
 	protected int itemLevel;
 	protected String itemDescription;
 
-	public ConsumableItem(int itemID, String itemName, int maxStackSize, double vendorPrice, int itemLevel,
+	public ConsumableItem() {
+	}
+
+	public ConsumableItem(int itemID, String itemName, int maxStackSize, int vendorPrice, int itemLevel,
 			String itemDescription) {
 		super(itemID, itemName, maxStackSize, vendorPrice);
 		this.itemLevel = itemLevel;

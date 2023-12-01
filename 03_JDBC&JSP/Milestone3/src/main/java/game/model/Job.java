@@ -2,19 +2,21 @@ package game.model;
 
 public class Job {
 
-	private int jobId;
-	private String jobName;
-	private boolean availability;
+	protected int jobId;
+	protected String jobName;
+	protected boolean availability;
 
-	public int getJobId() {
-		return jobId;
+	public Job() {
 	}
 
 	public Job(int jobId, String jobName, boolean availability) {
-		super();
 		this.jobId = jobId;
 		this.jobName = jobName;
 		this.availability = availability;
+	}
+
+	public int getJobId() {
+		return jobId;
 	}
 
 	public void setJobId(int jobId) {

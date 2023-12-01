@@ -25,7 +25,7 @@ public class CurrencyDao {
 	}
 
 	public Currency create(Currency currency) throws SQLException {
-		String insertCurrency = "INSERT INTO currency (currency_name, maximum_amount, weekly_cap, availability) VALUES (?, ?, ?, ?)";
+		String insertCurrency = "INSERT INTO currency (currency_name, maximum_amount, weekly_cap, availiability) VALUES (?, ?, ?, ?)";
 
 		Connection connection = null;
 		PreparedStatement insertStmt = null;

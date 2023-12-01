@@ -1,11 +1,22 @@
 package game.model;
 
 public class CharacterJob {
-	private Character character;
-	private Job job;
-	private int jobLevel;
-	private int experiencePoint;
-	private boolean isCurrentJob;
+	protected Character character;
+	protected Job job;
+	protected int jobLevel;
+	protected int experiencePoint;
+	protected boolean isCurrentJob;
+
+	public CharacterJob() {
+	}
+
+	public CharacterJob(Character character, Job job, int jobLevel, int experiencePoint, boolean isCurrentJob) {
+		this.character = character;
+		this.job = job;
+		this.jobLevel = jobLevel;
+		this.experiencePoint = experiencePoint;
+		this.isCurrentJob = isCurrentJob;
+	}
 
 	public Character getCharacter() {
 		return character;

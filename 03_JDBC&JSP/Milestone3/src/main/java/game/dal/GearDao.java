@@ -7,9 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import game.model.Gear;
+import game.model.*;
 
-public class GearDao {
+public class GearDao extends ItemDao {
 	protected ConnectionManager connectionManager;
 	private static GearDao instance = null;
 
@@ -25,17 +25,21 @@ public class GearDao {
 	}
 
 	public Gear create(Gear gear) throws SQLException {
+		Item newItem = create(
+				new Item(gear.getItemID(), gear.getItemName(), gear.getMaxStackSize(), gear.getVendorPrice()));
+
 		String insertGear = "INSERT INTO gear(item_id,item_level,gear_slot_id,required_level,defense_rating,magic_defense_rating) "
 				+ "VALUES(?,?,?,?,?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
 		ResultSet resultKey = null;
+		gear.setItemID(newItem.getItemID());
 		try {
 			connection = connectionManager.getConnection();
 			insertStmt = connection.prepareStatement(insertGear);
 			insertStmt.setInt(1, gear.getItemID());
 			insertStmt.setInt(2, gear.getItemLevel());
-			insertStmt.setInt(3, gear.getGearSlotID());
+			insertStmt.setInt(3, gear.getGearSlot().getGearSlotId());
 			insertStmt.setInt(4, gear.getRequiredLevel());
 			insertStmt.setFloat(5, gear.getDefenseRating());
 			insertStmt.setFloat(6, gear.getMagicDefenseRating());
@@ -68,17 +72,19 @@ public class GearDao {
 			selectStmt = connection.prepareStatement(selectGear);
 			selectStmt.setInt(1, itemID);
 			results = selectStmt.executeQuery();
+			GearSlotDao gearSlotDao = GearSlotDao.getInstance();
 			if (results.next()) {
 				String resultItemName = results.getString("item_name");
 				int resultMaxStackSize = results.getInt("max_stack_size");
-				Double resultVendorPrize = results.getDouble("vendor_price");
+				int resultVendorPrize = results.getInt("vendor_price");
 				int resultItemLevel = results.getInt("item_level");
 				int resultGearSlotID = results.getInt("gear_slot_id");
 				int resultRequiredLevel = results.getInt("required_level");
 				int resultDefenseRating = results.getInt("defense_rating");
 				int resultMagicDefenseRating = results.getInt("magic_defense_rating");
+				GearSlot gearSlot = gearSlotDao.getGearSlotById(resultGearSlotID);
 				Gear gear = new Gear(itemID, resultItemName, resultMaxStackSize, resultVendorPrize, resultItemLevel,
-						resultGearSlotID, resultRequiredLevel, resultDefenseRating, resultMagicDefenseRating);
+						gearSlot, resultRequiredLevel, resultDefenseRating, resultMagicDefenseRating);
 				return gear;
 			}
 		} catch (SQLException e) {
@@ -112,19 +118,20 @@ public class GearDao {
 			selectStmt = connection.prepareStatement(selectGearByPartialName);
 			selectStmt.setString(1, "%" + name + "%");
 			results = selectStmt.executeQuery();
+			GearSlotDao gearSlotDao = GearSlotDao.getInstance();
 
 			while (results.next()) {
 				int itemID = results.getInt("item_id");
 				String itemName = results.getString("item_name");
 				int maxStackSize = results.getInt("max_stack_size");
-				double vendorPrice = results.getDouble("vendor_price");
+				int vendorPrice = results.getInt("vendor_price");
 				int itemLevel = results.getInt("item_level");
 				int gearSlotID = results.getInt("gear_slot_id");
 				int requiredLevel = results.getInt("required_level");
 				int defenseRating = results.getInt("defense_rating");
 				int magicDefenseRating = results.getInt("magic_defense_rating");
-
-				Gear gear = new Gear(itemID, itemName, maxStackSize, vendorPrice, itemLevel, gearSlotID, requiredLevel,
+				GearSlot gearSlot = gearSlotDao.getGearSlotById(gearSlotID);
+				Gear gear = new Gear(itemID, itemName, maxStackSize, vendorPrice, itemLevel, gearSlot, requiredLevel,
 						defenseRating, magicDefenseRating);
 				gears.add(gear);
 			}
@@ -168,5 +175,4 @@ public class GearDao {
 			}
 		}
 	}
-
 }

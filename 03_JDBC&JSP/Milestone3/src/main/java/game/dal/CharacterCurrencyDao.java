@@ -6,7 +6,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class CharacterCurrencyDao {
 	protected ConnectionManager connectionManager;
@@ -24,7 +23,7 @@ public class CharacterCurrencyDao {
 		connectionManager = new ConnectionManager();
 	}
 
-	public CharacterCurrency insertCharacterCurrency(CharacterCurrency characterCurrency) throws SQLException {
+	public CharacterCurrency create(CharacterCurrency characterCurrency) throws SQLException {
 		String insertCharacterCurrency = "INSERT INTO character_currency (character_id, currency_id, weekly_amount, total_amount) VALUES (?, ?, ?, ?)";
 
 		Connection connection = null;
@@ -32,7 +31,7 @@ public class CharacterCurrencyDao {
 
 		try {
 			connection = connectionManager.getConnection();
-			insertStmt = connection.prepareStatement(insertCharacterCurrency, Statement.RETURN_GENERATED_KEYS);
+			insertStmt = connection.prepareStatement(insertCharacterCurrency);
 			insertStmt.setInt(1, characterCurrency.getCharacter().getCharacterID());
 			insertStmt.setInt(2, characterCurrency.getCurrency().getCurrencyId());
 			insertStmt.setInt(3, characterCurrency.getWeeklyAmount());

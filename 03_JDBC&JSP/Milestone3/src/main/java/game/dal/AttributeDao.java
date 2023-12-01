@@ -26,15 +26,14 @@ public class AttributeDao {
 	}
 
 	public Attribute create(Attribute attribute) throws SQLException {
-		String insertAttribute = "INSERT INTO Attribute(attribute_id,attribute_name) " + "VALUES(?,?);";
+		String insertAttribute = "INSERT INTO Attribute(attribute_name) " + "VALUES(?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
 		ResultSet resultKey = null;
 		try {
 			connection = connectionManager.getConnection();
 			insertStmt = connection.prepareStatement(insertAttribute, Statement.RETURN_GENERATED_KEYS);
-			insertStmt.setInt(1, attribute.getAttributeID());
-			insertStmt.setString(2, attribute.getAttributesName());
+			insertStmt.setString(1, attribute.getAttributesName());
 			insertStmt.executeUpdate();
 
 			resultKey = insertStmt.getGeneratedKeys();

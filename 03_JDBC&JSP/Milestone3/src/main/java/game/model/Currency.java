@@ -1,11 +1,26 @@
 package game.model;
 
 public class Currency {
-	private int currencyId;
-	private String currencyName;
-	private int maximumAmount;
-	private int weeklyCap;
-	private boolean availability;
+	protected int currencyId;
+	protected String currencyName;
+	protected int maximumAmount;
+	protected int weeklyCap;
+	protected boolean availability;
+
+	public Currency() {
+	}
+
+	public Currency(int currencyId) {
+		this.currencyId = currencyId;
+	}
+
+	public Currency(int currencyId, String currencyName, int maximumAmount, int weeklyCap, boolean availability) {
+		this.currencyId = currencyId;
+		this.currencyName = currencyName;
+		this.maximumAmount = maximumAmount;
+		this.weeklyCap = weeklyCap;
+		this.availability = availability;
+	}
 
 	public int getCurrencyId() {
 		return currencyId;

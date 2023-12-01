@@ -6,7 +6,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class InventoryDao {
 	protected ConnectionManager connectionManager;
@@ -24,8 +23,8 @@ public class InventoryDao {
 		connectionManager = new ConnectionManager();
 	}
 
-	public Inventory insertInventory(Inventory inventory) throws SQLException {
-		String insertInventory = "INSERT INTO inventory (character_id, inventory_slot_id, quantity, item_id) VALUES (?, ?, ?, ?)";
+	public Inventory create(Inventory inventory) throws SQLException {
+		String insertInventory = "INSERT INTO inventory(character_id, inventory_slot_id, quantity, item_id) VALUES (?, ?, ?, ?)";
 
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
@@ -33,7 +32,7 @@ public class InventoryDao {
 
 		try {
 			connection = connectionManager.getConnection();
-			insertStmt = connection.prepareStatement(insertInventory, Statement.RETURN_GENERATED_KEYS);
+			insertStmt = connection.prepareStatement(insertInventory);
 			insertStmt.setInt(1, inventory.getCharacter().getCharacterID());
 			insertStmt.setInt(2, inventory.getInventorySlotId());
 			insertStmt.setInt(3, inventory.getQuantity());
@@ -57,8 +56,8 @@ public class InventoryDao {
 		}
 	}
 
-	public Inventory getInventoryByIds(int characterId, int inventorySlotId) throws SQLException {
-		String selectInventory = "SELECT character_id, inventory_slot_id, quantity, item_id FROM inventory WHERE character_id = ? AND inventory_slot_id = ?";
+	public Inventory getInventoryByID(int characterId, int inventorySlotId) throws SQLException {
+		String selectInventory = "SELECT character_id, inventory_slot_id, quantity, item_id FROM inventory WHERE character_id = ? AND inventory_slot_id = ?; ";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
 		ResultSet results = null;

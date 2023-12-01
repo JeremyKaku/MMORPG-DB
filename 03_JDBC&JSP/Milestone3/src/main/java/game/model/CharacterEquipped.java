@@ -3,7 +3,16 @@ package game.model;
 public class CharacterEquipped {
 	private Character character;
 	private GearSlot gearSlot;
-	private Item item;
+	private Gear gear;
+
+	public CharacterEquipped() {
+	}
+
+	public CharacterEquipped(Character character, GearSlot gearSlot, Gear gear) {
+		this.character = character;
+		this.gearSlot = gearSlot;
+		this.gear = gear;
+	}
 
 	public Character getCharacter() {
 		return character;
@@ -21,12 +30,12 @@ public class CharacterEquipped {
 		this.gearSlot = gearSlot;
 	}
 
-	public Item getItem() {
-		return item;
+	public Gear getGear() {
+		return gear;
 	}
 
-	public void setItem(Item item) {
-		this.item = item;
+	public void setGear(Gear item) {
+		this.gear = item;
 	}
 
 }

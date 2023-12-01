@@ -60,7 +60,7 @@ public class CharacterAttributeDao {
 	public List<CharacterAttribute> getAttributesByCharacter(Character character) throws SQLException {
 		List<CharacterAttribute> attributes = new ArrayList<CharacterAttribute>();
 		String selectAttributes = "SELECT character_id,attribute_id,attribute_value "
-				+ "FROM character_attribute WHERE character_id=?;";
+				+ "FROM Rating WHERE character_id=?;";
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
 		ResultSet results = null;

@@ -6,8 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import game.model.ConsumableItem;
+import game.model.Item;
 
-public class ConsumableItemDao {
+public class ConsumableItemDao extends ItemDao {
 	protected ConnectionManager connectionManager;
 	private static ConsumableItemDao instance = null;
 
@@ -23,10 +24,15 @@ public class ConsumableItemDao {
 	}
 
 	public ConsumableItem create(ConsumableItem consumable) throws SQLException {
-		String insertConsumable = "INSERT INTO weapon(item_id,item_level,item_description) " + "VALUES(?,?,?);";
+		Item newItem = create(new Item(consumable.getItemID(), consumable.getItemName(), consumable.getMaxStackSize(),
+				consumable.getVendorPrice()));
+
+		String insertConsumable = "INSERT INTO consumable_item(item_id,item_level,item_description) "
+				+ "VALUES(?,?,?);";
 		Connection connection = null;
 		PreparedStatement insertStmt = null;
 		ResultSet resultKey = null;
+		consumable.setItemID(newItem.getItemID());
 		try {
 			connection = connectionManager.getConnection();
 			insertStmt = connection.prepareStatement(insertConsumable);
@@ -65,7 +71,7 @@ public class ConsumableItemDao {
 			if (results.next()) {
 				String resultItemName = results.getString("item_name");
 				int resultMaxStackSize = results.getInt("max_stack_size");
-				Double resultVendorPrize = results.getDouble("vendor_price");
+				int resultVendorPrize = results.getInt("vendor_price");
 				int resultItemLevel = results.getInt("item_level");
 				String resultItemDes = results.getString("item_description");
 				ConsumableItem reviewer = new ConsumableItem(itemID, resultItemName, resultMaxStackSize,
@@ -89,7 +95,7 @@ public class ConsumableItemDao {
 		return null;
 	}
 
-	public ConsumableItem updateItemDescription(ConsumableItem consumableItem, String newItemDescription)
+	public ConsumableItem updateConsumableItemDescription(ConsumableItem consumableItem, String newItemDescription)
 			throws SQLException {
 		String updateItemDescription = "UPDATE consumable_item SET item_description = ? WHERE item_id = ?;";
 		Connection connection = null;
@@ -100,7 +106,6 @@ public class ConsumableItemDao {
 			updateStmt.setString(1, newItemDescription);
 			updateStmt.setInt(2, consumableItem.getItemID());
 			updateStmt.executeUpdate();
-
 			consumableItem.setItemDescription(newItemDescription);
 			return consumableItem;
 		} catch (SQLException e) {
@@ -116,7 +121,7 @@ public class ConsumableItemDao {
 		}
 	}
 
-	public void delete(ConsumableItem consumableItem) throws SQLException {
+	public ConsumableItem delete(ConsumableItem consumableItem) throws SQLException {
 		String deleteConsumableItem = "DELETE FROM consumable_item WHERE item_id = ?;";
 		Connection connection = null;
 		PreparedStatement deleteStmt = null;
@@ -125,6 +130,7 @@ public class ConsumableItemDao {
 			deleteStmt = connection.prepareStatement(deleteConsumableItem);
 			deleteStmt.setInt(1, consumableItem.getItemID());
 			deleteStmt.executeUpdate();
+			return null;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw e;

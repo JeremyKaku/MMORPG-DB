@@ -2,15 +2,23 @@ package game.model;
 
 public class WeaponJob {
 
-	private Item item;
-	private Job job;
+	protected Weapon weapon;
+	protected Job job;
 
-	public Item getItem() {
-		return item;
+	public WeaponJob() {
 	}
 
-	public void setItem(Item item) {
-		this.item = item;
+	public WeaponJob(Weapon weapon, Job job) {
+		this.weapon = weapon;
+		this.job = job;
+	}
+
+	public Weapon getWeapon() {
+		return weapon;
+	}
+
+	public void setWeapon(Weapon weapon) {
+		this.weapon = weapon;
 	}
 
 	public Job getJob() {
@@ -20,4 +28,5 @@ public class WeaponJob {
 	public void setJob(Job job) {
 		this.job = job;
 	}
+
 }

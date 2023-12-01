@@ -69,9 +69,6 @@ public class ConsumableItemEffectDao {
 			ConsumableItemDao consumableItemDao = ConsumableItemDao.getInstance();
 			AttributeDao attributeDao = AttributeDao.getInstance();
 			if (results.next()) {
-//					int resultItemLevel = results.getInt("item_level");
-//					String resultItemDes = results.getString("item_description");
-//					String resultAttributeName = results.getString("attribute_name");
 				int resultEffectPercentage = results.getInt("effect_percentage");
 				int resultMaxEffectValue = results.getInt("max_effect_value");
 
@@ -98,46 +95,4 @@ public class ConsumableItemEffectDao {
 		return null;
 	}
 
-//		
-//		public List<ConsumableItemEffect> getAttributesByItemID(int itemID) throws SQLException {
-//			List<ConsumableItemEffect> attributeEffects = new ArrayList<ConsumableItemEffect>();
-//			String selectAttributes = 
-//					"SELECT  cie.item_id as item_id,a.attribute_id as attribute_id,a.attribute_name as attribute_name,cie.effect_percentage as effect_percentage,cie.max_effect_value as max_effect_value " + 
-//					" FROM consumable_item_effect cie JOIN Attribute a ON a.attribute_id = cie.attribute_id WHERE item_id=?;";
-//			Connection connection = null;
-//			PreparedStatement selectStmt = null;
-//			ResultSet results = null;
-//			try {
-//				connection = connectionManager.getConnection();
-//				selectStmt = connection.prepareStatement(selectAttributes);
-//				selectStmt.setInt(1, itemID);
-//				results = selectStmt.executeQuery();
-//				ItemDao itemDao = ItemDao.getInstance();
-//				AttributeDao attributeDao = AttributeDao.getInstance();
-//				while(results.next()) {
-//					int resultAttributeID = results.getInt("attribute_id");
-//					String resultAttributeName = results.getString("attribute_name");
-//					int resultEffectPercentage= results.getInt("effect_percentage");
-//					int resultMaxEffectValue= results.getInt("max_effect_value");
-//					
-//					Item item = itemDao.getItemByID(itemID);
-//					ConsumableItem consumableItem = new ConsumableItem(item,attribute);
-//					attributeEffects.add(consumableItem);
-//				}
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//				throw e;
-//			} finally {
-//				if(connection != null) {
-//					connection.close();
-//				}
-//				if(selectStmt != null) {
-//					selectStmt.close();
-//				}
-//				if(results != null) {
-//					results.close();
-//				}
-//			}
-//			return attributes;
-//		}
 }

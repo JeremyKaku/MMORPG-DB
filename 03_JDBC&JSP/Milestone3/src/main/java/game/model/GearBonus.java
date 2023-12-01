@@ -5,6 +5,9 @@ public class GearBonus {
 	protected Attribute attribute;
 	protected int bonusValue;
 
+	public GearBonus() {
+	}
+
 	public GearBonus(Gear item, Attribute attribute, int bonusValue) {
 		this.item = item;
 		this.attribute = attribute;

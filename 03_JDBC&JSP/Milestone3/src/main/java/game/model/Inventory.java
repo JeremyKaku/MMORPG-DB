@@ -6,6 +6,16 @@ public class Inventory {
 	private int quantity;
 	private Item item;
 
+	public Inventory() {
+	}
+
+	public Inventory(Character character, int inventorySlotId, int quantity, Item item) {
+		this.character = character;
+		this.inventorySlotId = inventorySlotId;
+		this.quantity = quantity;
+		this.item = item;
+	}
+
 	public Character getCharacter() {
 		return character;
 	}
