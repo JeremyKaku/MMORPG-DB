@@ -1,10 +1,13 @@
 package game.model;
 
 public class ConsumableItemEffect {
-    protected ConsumableItem item;
-    protected Attribute attribute;
-    protected int effectPercentage;
-    protected int maxEffectValue;
+	protected ConsumableItem item;
+	protected Attribute attribute;
+	protected int effectPercentage;
+	protected int maxEffectValue;
+
+	public ConsumableItemEffect() {
+	}
 
 	public ConsumableItemEffect(ConsumableItem item, Attribute attribute, int effectPercentage, int maxEffectValue) {
 		this.item = item;
@@ -17,7 +20,7 @@ public class ConsumableItemEffect {
 		this.item = item;
 		this.attribute = attribute;
 	}
-	
+
 	/** Getters and setters. */
 
 	public ConsumableItem getItem() {

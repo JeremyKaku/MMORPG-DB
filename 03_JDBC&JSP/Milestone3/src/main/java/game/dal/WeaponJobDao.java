@@ -23,7 +23,7 @@ public class WeaponJobDao {
         connectionManager = new ConnectionManager();
     }
 
-    public WeaponJob insertWeaponJob(WeaponJob weaponJob) throws SQLException {
+    public WeaponJob create(WeaponJob weaponJob) throws SQLException {
         String insertWeaponJob = "INSERT INTO weapon_job (item_id, job_id) VALUES (?, ?)";
 
         Connection connection = null;
@@ -33,7 +33,7 @@ public class WeaponJobDao {
         try {
             connection = connectionManager.getConnection();
             insertStmt = connection.prepareStatement(insertWeaponJob);
-            insertStmt.setInt(1, weaponJob.getItem().getItemID());
+            insertStmt.setInt(1, weaponJob.getWeapon().getItemID());
             insertStmt.setInt(2, weaponJob.getJob().getJobId());
             insertStmt.executeUpdate();
 
@@ -60,7 +60,7 @@ public class WeaponJobDao {
         PreparedStatement selectStmt = null;
         ResultSet results = null;
         JobDao jobDao = JobDao.getInstance();
-        ItemDao itemDao = ItemDao.getInstance();
+        WeaponDao weaponDao = WeaponDao.getInstance();
 
         try {
         	connection = connectionManager.getConnection();
@@ -74,7 +74,7 @@ public class WeaponJobDao {
                 int resultJobID = results.getInt("job_id");
                 
                 WeaponJob weaponJob = new WeaponJob();
-                weaponJob.setItem(itemDao.getItemByID(resultItemID));
+                weaponJob.setWeapon(weaponDao.getWeaponByID(resultItemID));
                 weaponJob.setJob(jobDao.getJobById(resultJobID));
 
                 return weaponJob;

@@ -1,9 +1,12 @@
 package game.model;
 
 public class GearBonus {
-    protected Gear item;
-    protected Attribute attribute;
-    protected int bonusValue;
+	protected Gear item;
+	protected Attribute attribute;
+	protected int bonusValue;
+
+	public GearBonus() {
+	}
 
 	public GearBonus(Gear item, Attribute attribute, int bonusValue) {
 		this.item = item;
@@ -15,7 +18,7 @@ public class GearBonus {
 		this.item = item;
 		this.attribute = attribute;
 	}
-	
+
 	/** Getters and setters. */
 
 	public Gear getItem() {

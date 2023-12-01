@@ -4,10 +4,19 @@ public class Item {
 	protected int itemID;
 	protected String itemName;
 	protected int maxStackSize;
-	protected double vendorPrice;
-	
-	public Item(int itemID, String itemName, int maxStackSize, double vendorPrice) {
+	protected int vendorPrice;
+
+	public Item() {
+	}
+
+	public Item(int itemID, String itemName, int maxStackSize, int vendorPrice) {
 		this.itemID = itemID;
+		this.itemName = itemName;
+		this.maxStackSize = maxStackSize;
+		this.vendorPrice = vendorPrice;
+	}
+	
+	public Item(String itemName, int maxStackSize, int vendorPrice) {
 		this.itemName = itemName;
 		this.maxStackSize = maxStackSize;
 		this.vendorPrice = vendorPrice;
@@ -18,7 +27,7 @@ public class Item {
 	}
 
 	/** Getters and setters. */
-	
+
 	public int getItemID() {
 		return itemID;
 	}
@@ -43,11 +52,11 @@ public class Item {
 		this.maxStackSize = maxStackSize;
 	}
 
-	public double getVendorPrice() {
+	public int getVendorPrice() {
 		return vendorPrice;
 	}
 
-	public void setVendorPrice(double vendorPrice) {
+	public void setVendorPrice(int vendorPrice) {
 		this.vendorPrice = vendorPrice;
 	}
 }

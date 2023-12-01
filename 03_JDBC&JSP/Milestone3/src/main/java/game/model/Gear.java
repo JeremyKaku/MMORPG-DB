@@ -2,13 +2,16 @@ package game.model;
 
 public class Gear extends Item {
 	protected int itemLevel;
-	protected int gearSlotID;
+	protected GearSlot gearSlotID;
 	protected int requiredLevel;
 	protected int defenseRating;
 	protected int magicDefenseRating;
-	
-	public Gear(int itemID, String itemName, int maxStackSize, double vendorPrice, int itemLevel,
-			int gearSlotID, int requiredLevel, int defenseRating, int magicDefenseRating) {
+
+	public Gear() {
+	}
+
+	public Gear(int itemID, String itemName, int maxStackSize, int vendorPrice, int itemLevel, GearSlot gearSlotID,
+			int requiredLevel, int defenseRating, int magicDefenseRating) {
 		super(itemID, itemName, maxStackSize, vendorPrice);
 		this.itemLevel = itemLevel;
 		this.gearSlotID = gearSlotID;
@@ -16,7 +19,7 @@ public class Gear extends Item {
 		this.defenseRating = defenseRating;
 		this.magicDefenseRating = magicDefenseRating;
 	}
-	
+
 	public Gear(int itemID) {
 		super(itemID);
 	}
@@ -31,11 +34,11 @@ public class Gear extends Item {
 		this.itemLevel = itemLevel;
 	}
 
-	public int getGearSlotID() {
+	public GearSlot getGearSlot() {
 		return gearSlotID;
 	}
 
-	public void setGearSlotID(int gearSlotID) {
+	public void setGearSlot(GearSlot gearSlotID) {
 		this.gearSlotID = gearSlotID;
 	}
 

@@ -1,13 +1,18 @@
 package game.model;
 
-public class CustomizedWeapon extends Weapon {
-    protected String itemQuality;
-    protected int customizedCondition;
-    protected String dyeColor;
-    protected String maker;
+import java.math.BigDecimal;
 
-	public CustomizedWeapon(int itemID, String itemName, int maxStackSize, double vendorPrice, int itemLevel,
-			int requiredLevel, int damageDone, float autoAttack, float attackDelay, String itemQuality,
+public class CustomizedWeapon extends Weapon {
+	protected String itemQuality;
+	protected int customizedCondition;
+	protected String dyeColor;
+	protected String maker;
+
+	public CustomizedWeapon() {
+	}
+
+	public CustomizedWeapon(int itemID, String itemName, int maxStackSize, int vendorPrice, int itemLevel,
+			int requiredLevel, int damageDone, BigDecimal autoAttack, BigDecimal attackDelay, String itemQuality,
 			int customizedCondition, String dyeColor, String maker) {
 		super(itemID, itemName, maxStackSize, vendorPrice, itemLevel, requiredLevel, damageDone, autoAttack,
 				attackDelay);
@@ -20,7 +25,7 @@ public class CustomizedWeapon extends Weapon {
 	public CustomizedWeapon(int itemID) {
 		super(itemID);
 	}
-    
+
 	/** Getters and setters. */
 
 	public String getItemQuality() {
@@ -53,5 +58,5 @@ public class CustomizedWeapon extends Weapon {
 
 	public void setMaker(String maker) {
 		this.maker = maker;
-	}   
+	}
 }
