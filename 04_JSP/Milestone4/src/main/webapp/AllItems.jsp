@@ -6,7 +6,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <title>All Items</title>
     <style>
         body {
@@ -148,12 +150,27 @@
         </select>
         <table>
             <thead>
-                <tr>
-                    <th>Item Name</th>
-                    <th>Max Stack Size</th>
-                    <th>Vendor Price</th>
-                </tr>
-            </thead>
+			    <tr>
+			        <th>
+			            Item Name
+			            <span class="sort-icon" data-column="itemName" data-sort="">
+			                <i class="fas fa-sort"></i>
+			            </span>
+			        </th>
+			        <th>
+			            Max Stack Size
+			            <span class="sort-icon" data-column="maxStackSize" data-sort="">
+			                <i class="fas fa-sort"></i>
+			            </span>
+			        </th>
+			        <th>
+			            Vendor Price
+			            <span class="sort-icon" data-column="vendorPrice" data-sort="">
+			                <i class="fas fa-sort"></i>
+			            </span>
+			        </th>
+			    </tr>
+			</thead>
             <tbody id="tableBody">
                 <c:forEach var="item" items="${showitems}">
                     <tr>
@@ -166,51 +183,79 @@
         </table>
     </div>
     <script>
-        function sortTable() {
-            const sortBy = document.getElementById('sortBy').value;
-            const tbody = document.getElementById('tableBody');
-            const rows = Array.from(tbody.rows);
-            const arr = [];
+    const sortIcons = document.querySelectorAll('.sort-icon');
+    let currentCategory = '';
 
-            rows.forEach(row => {
-                const item = {
-                    itemName: row.cells[0].textContent.trim(),
-                    maxStackSize: parseInt(row.cells[1].textContent.trim(), 10),
-                    vendorPrice: parseFloat(row.cells[2].textContent.trim())
-                };
-                arr.push(item);
-            });
+    sortIcons.forEach(icon => {
+        icon.addEventListener('click', function() {
+            const column = this.dataset.column;
+            const sortDirection = this.dataset.sort === 'asc' ? 'desc' : 'asc';
 
-            arr.sort((a, b) => {
-                // Handle numeric sorting for stack size and vendor price
-                if (sortBy === 'maxStackSize' || sortBy === 'vendorPrice') {
-                    return a[sortBy] - b[sortBy];
-                } else {
-                    // Handle alphabetical sorting for item name
-                    return a[sortBy].localeCompare(b[sortBy]);
+            this.dataset.sort = sortDirection;
+
+            sortIcons.forEach(i => {
+                if (i !== icon && i.dataset.column !== column) {
+                    i.dataset.sort = '';
                 }
             });
 
-            while (tbody.firstChild) {
-                tbody.removeChild(tbody.firstChild);
+            sortTable(column, sortDirection);
+        });
+    });
+
+    document.getElementById('sortBy').addEventListener('change', function() {
+        const selectedCategory = this.value;
+        currentCategory = selectedCategory;
+        sortTable(selectedCategory, 'asc');
+    });
+
+    function sortTable(column, direction) {
+        const tbody = document.getElementById('tableBody');
+        const rows = Array.from(tbody.rows);
+        const arr = [];
+
+        rows.forEach(row => {
+            const item = {
+                itemName: row.cells[0].textContent.trim(),
+                maxStackSize: parseInt(row.cells[1].textContent.trim(), 10),
+                vendorPrice: parseFloat(row.cells[2].textContent.trim())
+            };
+            arr.push(item);
+        });
+
+        arr.sort((a, b) => {
+            if (column === 'itemName') {
+                return direction === 'asc' ? a.itemName.localeCompare(b.itemName) : b.itemName.localeCompare(a.itemName);
+            } else if (column === 'maxStackSize') {
+                return direction === 'asc' ? a.maxStackSize - b.maxStackSize : b.maxStackSize - a.maxStackSize;
+            } else if (column === 'vendorPrice') {
+                return direction === 'asc' ? a.vendorPrice - b.vendorPrice : b.vendorPrice - a.vendorPrice;
             }
+        });
 
-            arr.forEach(item => {
-                const row = tbody.insertRow();
-                const cell1 = row.insertCell(0);
-                const cell2 = row.insertCell(1);
-                const cell3 = row.insertCell(2);
-
-                cell1.textContent = item.itemName;
-                cell2.textContent = item.maxStackSize;
-                cell3.textContent = item.vendorPrice;
-            });
+        while (tbody.firstChild) {
+            tbody.removeChild(tbody.firstChild);
         }
-        // On page load, sort by item name
-        window.onload = function() {
-            sortTable();
-        };
-    </script>
+
+        arr.forEach(item => {
+            const row = tbody.insertRow();
+            const cell1 = row.insertCell(0);
+            const cell2 = row.insertCell(1);
+            const cell3 = row.insertCell(2);
+
+            cell1.textContent = item.itemName;
+            cell2.textContent = item.maxStackSize;
+            cell3.textContent = item.vendorPrice;
+        });
+    }
+
+    // On page load, sort by item name
+    window.onload = function() {
+        sortTable('itemName', 'asc');
+    };
+</script>
+
+
 </body>
 </html>
 
