@@ -1,0 +1,151 @@
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: #fff;
+	display: flex;
+
+	align-items: center;
+	transition: transform 0.3s ease-in-out;
+}
+
+@media screen and (max-width: 800px) {
+	body {
+		transform: scale(0.8);
+		transform-origin: top left;
+	}
+}
+
+#characterInfo {
+	flex: 1;
+	padding: 5px;
+	box-sizing: border-box;
+	text-align: center;
+}
+
+#characterImage {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 40vw;
+	height: 100vh;
+	object-fit: cover;
+	z-index: -1;
+}
+
+.content {
+	background-color: rgba(255, 255, 255, 0);
+	padding: 20px;
+	border-radius: 10px;
+	position: relative;
+	z-index: 1;
+}
+
+.info {
+	flex: 1;
+	position: absolute;
+	top: 300px;
+	left: 650px;
+}
+
+h1 {
+	position: absolute;
+	top: 1%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+}
+
+.equipment {
+	flex: 1;
+	position: absolute;
+	top: 500px;
+	left: 870px;
+}
+
+.header-character {
+	color: rgb(147, 32, 146);
+	font-family: 'monospace', sans-serif;
+	font-size: 56px;
+	font-weight: bold;
+	font-style: italic;
+	display: inline-block;
+}
+
+.header-content {
+	position: relative;
+	top: 500px;
+}
+
+.icon {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 210px;
+	height: 100px;
+	float: left;
+}
+
+.img {
+	width: 80px;
+	height: 80px;
+}
+
+
+.iconInfo {
+	margin-top: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.back-image {
+	cursor: pointer;
+	width: 50px;
+	height: 50px;
+	left: 10px;
+	top: 10px;
+}
+
+.back-image:hover::after {
+	display: block;
+	position: absolute;
+	background-color: #000;
+	color: #fff;
+	padding: 5px;
+	border-radius: 5px;
+	left: 20px;
+	top: 10px;
+}
+
+a:hover {
+    cursor: pointer; 
+}
+
+.iconInfo img {
+	width: 50px;
+	margin-right: 10px;
+}
+
+.infoText {
+	display: none;
+}
+
+.my-text {
+	font-family: 'Arial', sans-serif;
+	font-size: 20px;
+	color: rgb(47, 249, 0);
+	font-weight: bold;
+	font-style: italic;
+	width: 200px
+}
+
+#navigationIcons {
+	display: flex;
+	justify-content: space-around;
+	padding: 20px;
+}
+
+#navigationIcons img {
+	width: 50px;
+}
