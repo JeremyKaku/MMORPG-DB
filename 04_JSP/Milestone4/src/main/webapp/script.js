@@ -1,24 +1,3 @@
-document.addEventListener("DOMContentLoaded", function() {
-	// hangover
-	document.getElementById("weaponInfo").addEventListener("mouseover", function() {
-		document.getElementById("weaponInfo").getElementsByClassName("infoText")[0].style.display = "block";
-	});
-
-	document.getElementById("gearInfo").addEventListener("mouseover", function() {
-		document.getElementById("gearInfo").getElementsByClassName("infoText")[0].style.display = "block";
-	});
-
-	// navi click
-	document.getElementById("navigationIcons").addEventListener("click", function(event) {
-		if (event.target.tagName === "IMG") {
-			// get the alt
-			var iconName = event.target.alt.toLowerCase();
-			// redirect to toaget page
-			window.location.href = iconName + ".jsp";
-		}
-	});
-});
-
 function goBack() {
 	window.history.back();
 }
