@@ -3,7 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page import="game.model.Character"%>
 <%@ page import="game.model.Weapon"%>
-<%@ page import="java.text.NumberFormat"%>
 
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -20,9 +19,6 @@
 	<%
 	Character character = (Character) request.getAttribute("character");
 	Weapon weapon = (Weapon) request.getAttribute("weapon");
-	String weaponInfo = "Weapon: " + weapon.getItemName() + "\nLevel: " + weapon.getItemLevel();
-	String test = weapon.getItemName();
-	NumberFormat numberFormat = NumberFormat.getInstance();
 	%>
 	<img src="images/go-back-icon.png" title="Back To Player Dashboard"
 		class='back-image' onclick="goBack()" alt="Back Icon">
@@ -67,8 +63,7 @@ Level: ${weapon.itemLevel}
 RequiredLevel: ${weapon.requiredLevel}
 AamageDone: ${weapon.damageDone}
 AutoAttack: ${weapon.autoAttack}
-AttackDelay: ${weapon.attackDelay}"
-			onmouseover="showWeaponInfo()">
+AttackDelay: ${weapon.attackDelay}">
 			<a class="my-text"> <img src="images/weapon-icon.png" class='img'
 				alt="Weapon Icon">Main Hand
 			</a>
