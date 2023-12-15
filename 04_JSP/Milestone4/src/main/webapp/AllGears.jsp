@@ -8,7 +8,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Gears</title>
+    <title>All Gear</title>
     <style>
         body {
             font-family: Arial, sans-serif;

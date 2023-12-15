@@ -54,6 +54,9 @@
             
             <button type="submit">Login</button>
         </form>
+        <div class="signup-link">
+            Don't have an account? <a href="Signup.jsp">Sign up here</a>.
+        </div>
     </div>
 
     <!-- Include the following script at the end of the <body> tag -->

@@ -287,7 +287,12 @@ INSERT INTO player VALUES
 (2,'Xue Han','han.xue2@northeastern.edu','password123'),
 (3,'Riddhi Gohil','gohil.r@northeastern.edu','password123'),
 (4,'Yashvi Garg','garg.yas@northeastern.edu','password123'),
-(5,'Gaurav Jurani','jurani.g@northeastern.edu','password123');
+(5,'Gaurav Jurani','jurani.g@northeastern.edu','password123'),
+(6,'Lee HOI','dc.g@northeastern.edu','password123'),
+(7,'John Smith','dsi.g@northeastern.edu','password123'),
+(8,'Joe Raku','jssni.g@northeastern.edu','password123'),
+(9,'Hash Go','jaani.g@northeastern.edu','password123'),
+(10,'Mina Nai','srani.g@northeastern.edu','password123');
 
 INSERT INTO job VALUES
 (1,'Dragoon',TRUE),
@@ -297,7 +302,9 @@ INSERT INTO job VALUES
 (5,'Scholar',TRUE),
 (6,'Paladin',TRUE),
 (7,'Lancer',TRUE),
-(8,'Reaper',TRUE);
+(8,'Reaper',TRUE),
+(9,'mage',TRUE),
+(10,'Samurai',TRUE);
 
 INSERT INTO attribute VALUES
 (1,'Strength'),
@@ -341,14 +348,33 @@ INSERT INTO item VALUES
 (26,'Lionsmane Belt',1,223),
 (27,'Tarnished Makai Bow',1,NULL),
 (28,'Tropaios Bow',1,NULL),
-(29,'Nue Greatbow',1,4);
+(29,'Nue Greatbow',1,4),
+(30,'Normal A',999,1),
+(31,'Normal B',999,1),
+(32,'Normal C',999,1),
+(33,'Normal D',999,1),
+(34,'Normal E',999,1),
+(35,'Weapon A',1,1),
+(36,'Weapon D',1,1),
+(37,'Weapon E',1,1),
+(38,'Normal F',999,1),
+(39,'Normal G',999,1),
+(40,'Normal EQ',999,1),
+(41,'Normal DB',999,1),
+(42,'Normal ES',999,1)
+;
 
 INSERT INTO miscellaneous_item VALUES
 (22,'This foul-smelling sap can be used to remove dyes quickly and easily. Remember to always use in a well-ventilated area.'),
 (23,'A tiny crystalline manifestation of aetheric fire energy.'),
 (24,'Summons a miniature recreation of a voidsent bomb, created via the thaumaturgical rendering of umbrally charged aetherial energy. Guaranteed never to self-destruct, or your gil back.'),
 (25,'A small, square slip of parchment stamped with the Ul''dahn royal seneschal''s seal proving your aid in the promotion of the Songbirds.'),
-(26,'Before becoming obsolete due to advancements in tailoring, belts such as this were used for holding up trousers and the like.');
+(26,'Before becoming obsolete due to advancements in tailoring, belts such as this were used for holding up trousers and the like.'),
+(30,'Just a normal thing.'),
+(31,'Just a normal thing.'),
+(32,'Just a normal thing.'),
+(33,'Just a normal thing.'),
+(34,'Just a normal thing.');
 
 INSERT INTO weapon VALUES
 (1,645,90,128,119.46,2.80),
@@ -358,7 +384,12 @@ INSERT INTO weapon VALUES
 (5,510,80,103,107.12,3.12),
 (27,1,1,9,9.12,3.04),
 (28,1,1,9,9.12,3.04),
-(29,1,1,9,9.12,3.04);
+(29,1,1,9,9.12,3.04),
+(35,1,1,9,9.12,3.04),
+(36,1,1,9,9.12,3.04),
+(37,1,1,9,9.12,3.04)
+
+;
 
 INSERT INTO gear_slot VALUES
 (1,'Shield'),
@@ -394,7 +425,10 @@ INSERT INTO weapon_job VALUES
 (5,5),
 (27,2),
 (28,2),
-(29,2);
+(29,2),
+(35,2),
+(36,2),
+(37,2);
 
 INSERT INTO gear_job VALUES
 (6,6),
@@ -477,7 +511,12 @@ INSERT INTO consumable_item VALUES
 (18,610,'Paralyzingly delicious juice freshly squeezed from thundermelons.'),
 (19,10,'This heart chocolate has been blessed by an ordained sister of the Temple of Menphina.'),
 (20,640,'Topped with sliced vegetables and a healthy coating of melted Garlean cheese, these rich eggplants have been roasted to tender perfection.'),
-(21,580,'Premium scallops are simmered with a rich blend of spices to create this savory dish.');
+(21,580,'Premium scallops are simmered with a rich blend of spices to create this savory dish.'),
+(38,6,'Pao A.'),
+(39,2,'Pao B.'),
+(40,3,'Pao C.'),
+(41,3,'Noodle.'),
+(42,4,'Milk.');
 
 INSERT INTO consumable_item_effect VALUES
 (17,5,8,82),
@@ -499,11 +538,20 @@ INSERT INTO game_character VALUES
 (2,	'Tifa','Lockhart',1,2),
 (3,	'Aerith','Gainsborough',1,3),
 (4,	'Yuffie','Kisaragi',1,4),
-(5,	'Barret','Wallace',5,5);
+(5,	'Barret','Wallace',5,5),
+(6,	'Ani','Bob',2,2),
+(7,	'Lee','Mario',3,3),
+(8,	'Oea','Pee',4,4),
+(9,	'Jerry','Rick',2,2),
+(10,'Lu','Ace',5,5);
 
 INSERT INTO character_job VALUES
 (1,1,90,10838000,TRUE),
 (1,7,90,10838000,FALSE),
+(1,2,2,23,FALSE),
+(1,3,1,4,FALSE),
+(1,4,12,2444,FALSE),
+(1,5,12,2433,FALSE),
 (2,2,90,10838000,TRUE),
 (3,3,90,10838000,TRUE),
 (4,4,40,142000,TRUE),
@@ -515,7 +563,11 @@ INSERT INTO currency VALUES
 (3,'Ventures',999999999,NULL,TRUE),
 (4,'Wolf Marks',200000,NULL,TRUE),
 (5,'Capped Tomestone',2000,900,TRUE),
-(6,'Allagan Tomestone of Causality',2000,NULL,FALSE);
+(6,'Allagan Tomestone of Causality',2000,NULL,FALSE),
+(7,'Time',2000,NULL,FALSE),
+(8,'PvP',4200,NULL,FALSE),
+(9,'PVE',1200,NULL,FALSE),
+(10,'Lose Heart',3000,NULL,FALSE);
 
 INSERT INTO character_currency VALUES
 (1,1,NULL,259222112),
@@ -537,6 +589,10 @@ INSERT INTO inventory VALUES
 (2,3,59,17),
 (3,4,2,20),
 (4,22,1,22),
+(5,14,520,17),
+(5,70,25,18),
+(5,122,11,19),
+(5,144,1,25),
 (5,109,1,26);
 
 INSERT INTO quality VALUES
@@ -548,10 +604,21 @@ INSERT INTO customized_gear VALUES
 (7,'normal',20,'B3B3B3',NULL),
 (8,'normal',66,NULL,NULL),
 (9,'normal',78,'BBFFBB','Jul Oul'),
-(10,'high',88,NULL,NULL);
+(10,'high',88,NULL,NULL),
+(11,'high',88,NULL,NULL),
+(12,'high',88,NULL,NULL),
+(13,'high',88,NULL,NULL),
+(14,'high',88,NULL,NULL),
+(15,'high',88,NULL,NULL),
+(16,'high',88,NULL,NULL);
 
 INSERT INTO customized_weapon VALUES
 (1,'high',69,'FF0000','Dark Matter'),
+(2,'high',69,'FF0000','Dark'),
+(3,'high',69,'FF0000','Matter'),
+(5,'high',69,'FF0000','Dter'),
+(35,'high',69,'FF0000','rkter'),
+(36,'high',69,'FF0000','DMatt'),
 (4,'normal',100,NULL,NULL),
 (27,'normal',100,NULL,NULL),
 (28,'normal',100,NULL,NULL),

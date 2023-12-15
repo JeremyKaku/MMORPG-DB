@@ -1,7 +1,6 @@
 package game.servlet;
 
 import game.dal.CharacterDao;
-import game.dal.PlayerDao;
 import game.model.Character;
 import game.model.Player;
 

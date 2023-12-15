@@ -236,5 +236,35 @@ public class CharacterDao {
 
 		return characters;
 	}
+	
+	public boolean verifyFirstNameLastName(String firstName, String lastName) throws SQLException {
+		String selectPerson = "SELECT character_id,first_name,last_name,player_id,weapon_id FROM game_character WHERE first_name=? And last_name=?;";
+		Connection connection = null;
+		PreparedStatement selectStmt = null;
+		ResultSet results = null;
+		try {
+			connection = connectionManager.getConnection();
+			selectStmt = connection.prepareStatement(selectPerson);
+			selectStmt.setString(1, firstName);
+			selectStmt.setString(2, lastName);
+			results = selectStmt.executeQuery();
+			if (results.next()) {
+				return true;			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if (connection != null) {
+				connection.close();
+			}
+			if (selectStmt != null) {
+				selectStmt.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return false;
+	}
 
 }

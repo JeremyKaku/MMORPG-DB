@@ -24,9 +24,14 @@ public class Character {
 		this.player = player;
 		this.weapon = weapon;
 	}
-	
+
 	public Character(int characterID) {
 		this.characterID = characterID;
+	}
+
+	public Character(String firstName, String lastName) {
+		this.firstName = firstName;
+		this.lastName = lastName;
 	}
 
 	public Character(Player player, Weapon weapon) {

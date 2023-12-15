@@ -121,6 +121,21 @@ a:hover {
 	background-color: #FF0000;
 	color: white;
 }
+
+.button-container .create-button {
+	background-color: black;
+	color: white;
+	font-size: 16px;
+}
+
+.bold-left {
+	font-weight: bold;
+	text-align: left;
+}
+
+.right {
+	text-align: right;
+}
 </style>
 </head>
 <body>
@@ -131,6 +146,13 @@ a:hover {
 		            	document.getElementById("deleteForm_" + characterID).submit();
 		        }
 	    	}
+	    	
+
+	        function redirect() {
+	            var url = '<c:url value="/create"/>';
+	            window.location.href = url;
+	        }
+
 	    </script>
 	<div class="container">
 		<div class="tabs-container">
@@ -138,20 +160,30 @@ a:hover {
 				<a href="#" class="tab">About Game</a>
 				<div class="dropdown-content">
 					<a href="<c:url value='/AllItems'/>">Items</a> <a
-						href="<c:url value='/AllGears'/>">Equipment</a> <a
+						href="<c:url value='/AllGears'/>">Gear</a> <a
 						href="<c:url value='/AllWeapons'/>">Weapons</a> <a
 						href="<c:url value='/Attributes'/>">Attributes</a> <a
 						href="<c:url value='/Jobs'/>">Jobs</a> <a
 						href="<c:url value='/AllCurrency'/>">Currency</a>
 				</div>
 			</div>
-			<a href="<c:url value='aboutme'/>" class="tab">About Me</a> <a
-				href="<c:url value='/login'/>" class="tab">Logout</a>
+			<a href="<c:url value='aboutme'/>" class="tab">${loggedInPlayer.playerName}</a>
+			<a href="<c:url value='/login'/>" class="tab">Logout</a>
 		</div>
 		<h1>Hi ${loggedInPlayer.playerName}!</h1>
 		<h2>Welcome to your dashboard.</h2>
 
-		<h3>Characters</h3>
+		<div class="button-container" style="">
+			<form class="right" id="deleteForm_${character.characterID}"
+				action="create" method="post">
+				<input type="hidden" name="plaerID"
+					value="${character.player.plaerID}">
+				<button onclick="redirect()" type="button" class="create-button">Create
+					Character</button>
+				<!-- <button type="submit" class="create-button">Create
+					Character</button> -->
+			</form>
+		</div>
 
 		<%-- Display success message if available --%>
 		<%
